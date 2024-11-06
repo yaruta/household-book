@@ -11,3 +11,28 @@ body {
 * {
   box-sizing: border-box;
 }
+
+.dark {
+  --bg-from-color: 11, 16, 30;
+  --bg-to-color: 31, 41, 55;
+  --sections-bg-1: 3,7,18;
+  --sections-bg-2: 17, 24,39;
+  --elements-color-main: 255, 255, 255;
+  --redc: 239,68,68;
+  --yellowc: 234, 179, 8;
+  --purplec: 168, 85, 247;
+  --logo-color: 216, 180, 254;
+}
+
+.light {
+  --bg-from-color: 238, 238, 238;
+  --bg-to-color: 252, 252, 252;
+  --sections-bg-1: 245, 245, 245;
+  --sections-bg-2: 255, 255, 255;
+  --elements-color-main: 0, 0, 0;
+  --redc: 250, 110, 115;
+  --yellowc: 255, 255, 122;
+  --purplec: 209, 164, 252;
+  --logo-color: 168, 85, 247;
+}
+

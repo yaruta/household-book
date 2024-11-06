@@ -1,23 +1,34 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Layout/Header/Header";
 import Sidebar from "../components/Layout/Sidebar/Sidebar";
-import ColorSchemeNav from "../components/Layout/ColorSchemeSidebar/ColorSchemeNav";
+import ColorThemeNav from "../components/Layout/ColorThemeSidebar/ColorThemeNav";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function RootLayout() {
-  const isSidebar = useSelector((state) => state.ui.sidebarIsVisible);
+  const {sidebarIsVisible, theme} = useSelector((state) => state.ui);
+
+  useEffect(() => {
+    document.body.classList.remove("dark", "light");
+    if (theme === "dark") {
+      document.body.classList.add("dark");
+    } else {
+      document.body.classList.add("light");
+    }
+  }, [theme]);
 
   return (
-    <>
-      <section className="w-full h-lvh bg-gradient-to-b from-50% from-gray-900 to-90% to-gray-800 flex justify-start">
-        {isSidebar && <Sidebar />}
-        <main className="w-full">
-          <Header />
-          <Outlet />
-        </main>
-        <ColorSchemeNav />
-      </section>
-    </>
+    <section
+      id="main"
+      className="w-full h-lvh bg-gradient-to-b from-50% from-bg-main-color to-90% to-bg-secondary-color  flex justify-start"
+    >
+      {sidebarIsVisible && <Sidebar />}
+      <main className="w-full">
+        <Header />
+        <Outlet />
+      </main>
+      <ColorThemeNav />
+    </section>
   );
 }
 

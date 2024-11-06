@@ -11,7 +11,7 @@ function BalanceItem({ amount, type }) {
   }
 
   return (
-    <div className="text-white flex-col self-end ">
+    <div className="text-elements-color-main flex-col self-end ">
       <p
         className={`text-2xl text-transparent bg-clip-text bg-gradient-to-br from-30% to-90% ${classes}`}
       >

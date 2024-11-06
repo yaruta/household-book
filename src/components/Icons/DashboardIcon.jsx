@@ -1,11 +1,11 @@
-function DashboardIcon() {
+function DashboardIcon({color}) {
   return (
     <svg
       id="fi_7874227"
       height="20"
       viewBox="0 0 91 91"
       width="20"
-      fill="white"
+      fill={color}
       xmlns="http://www.w3.org/2000/svg"
       data-name="Layer 1"
     >

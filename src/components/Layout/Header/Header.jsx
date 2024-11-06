@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
+import { uiActions } from "../../../store/ui-slice";
+
 import DefaultAvatar from "../../UI/DefaultAvatar";
 import UserPhotoIcon from "../../UI/UserAvatar";
-import { uiActions } from "../../../store/ui-slice";
 
 function Header() {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ function Header() {
 
   return (
     <header className="w-full flex items-center justify-between p-5 pl-12 pr-12">
-      <button className="text-white" onClick={handleToggleSidebar}>
+      <button className="text-elements-color-main" onClick={handleToggleSidebar}>
         <span className="text-4xl">≡</span>
       </button>
       {userPhoto && (

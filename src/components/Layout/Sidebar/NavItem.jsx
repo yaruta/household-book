@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function NavItem({ path, children }) {
 
-  const itemsClasses = "flex justify-start items-center gap-4 p-2 text-white";
+  const itemsClasses = "flex justify-start items-center gap-4 p-2 text-elements-color-main";
 
   return (
     <li className="mb-4">
@@ -10,7 +10,7 @@ function NavItem({ path, children }) {
         to={path}
         className={({ isActive }) =>
           isActive
-            ? `${itemsClasses} bg-gray-900 rounded-lg`
+            ? `${itemsClasses} bg-sections-bg-2 rounded-lg`
             : itemsClasses
         }
       >
