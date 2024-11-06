@@ -2,8 +2,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/RootLayout";
 import HomePage from "./pages/Home";
 import DashboardPage from "./pages/Dashboard";
-import TablesPage from "./pages/Tables";
+import TablesPage from "./pages/Table";
 import UserProfile from "./pages/UserProfile";
+import TablePage from "./pages/Table";
+import RootTables from "./pages/RootTables";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +22,13 @@ const router = createBrowserRouter([
       },
       {
         path: 'tables',
-        element: <TablesPage />
+        element: <RootTables />,
+        children: [
+          {
+            path: ':monthId',
+            element: <TablePage />
+          }
+        ]
       },
       {
         path: 'user',

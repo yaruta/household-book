@@ -1,4 +1,4 @@
-function TablesIcon({color}) {
+function TablesIcon() {
   return (
     <svg
       id="fi_3524883"
@@ -6,7 +6,7 @@ function TablesIcon({color}) {
       height="20"
       viewBox="0 0 24 24"
       width="20"
-      fill={color}
+      className="fill-elements-color-main"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>

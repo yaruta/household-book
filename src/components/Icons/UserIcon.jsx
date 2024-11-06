@@ -1,4 +1,4 @@
-export default function UserIcon({color}) {
+export default function UserIcon() {
     return (
       <svg
         height="20"
@@ -6,8 +6,7 @@ export default function UserIcon({color}) {
         width="20"
         xmlns="http://www.w3.org/2000/svg"
         id="fi_17808421"
-        fill={color}
-        className="pr-[2.5px] pb-[2px]"
+        className="fill-elements-color-main pr-[2.5px] pb-[2px]"
       >
         <g clipRule="evenodd"  fillRule="evenodd">
           <path d="m12 10.5c1.3807 0 2.5-1.11929 2.5-2.5s-1.1193-2.5-2.5-2.5-2.5 1.11929-2.5 2.5 1.1193 2.5 2.5 2.5zm0 1.5c2.2091 0 4-1.7909 4-4 0-2.20914-1.7909-4-4-4-2.20914 0-4 1.79086-4 4 0 2.2091 1.79086 4 4 4z"></path>

@@ -20,7 +20,7 @@ function RootLayout() {
   return (
     <section
       id="main"
-      className="w-full h-lvh bg-gradient-to-b from-50% from-bg-main-color to-90% to-bg-secondary-color  flex justify-start"
+      className="w-full h-full bg-gradient-to-b from-50% from-bg-main-color to-90% to-bg-secondary-color  flex justify-start"
     >
       {sidebarIsVisible && <Sidebar />}
       <main className="w-full">

@@ -1,10 +1,11 @@
 import mainPageImage from "../../assets/image-for-main-page.png";
 import Balance from "./Balance";
 import Greeting from "./Greeting";
+import Section from "../UI/Section";
 
 function MainSection() {
   return (
-    <section className="flex justify-between items-start gap-8 ml-12 mr-12 mt-16 p-8 rounded-3xl bg-gradient-to-r from-10% from-sections-bg-1 to-90% to-sections-bg-2/50">
+    <Section className="flex justify-between items-start gap-8 p-8 mt-16">
       <article className="h-8 w-100 flex-col">
         <Greeting />
         <Balance />
@@ -14,7 +15,7 @@ function MainSection() {
         alt="a women is sitting at a computer"
         className="w-60 h-60"
       />
-    </section>
+    </Section>
   );
 }
 
