@@ -1,12 +1,21 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Header from "../components/Layout/Header/Header";
 import Sidebar from "../components/Layout/Sidebar/Sidebar";
 import ColorThemeNav from "../components/Layout/ColorThemeSidebar/ColorThemeNav";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useAuth } from "../store/authContext";
 
 function RootLayout() {
-  const {sidebarIsVisible, theme} = useSelector((state) => state.ui);
+  const { userLoggedIn } = useAuth();
+  const { sidebarIsVisible, theme } = useSelector((state) => state.ui);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userLoggedIn) {
+      navigate("/auth?mode=login");
+    }
+  }, []);
 
   useEffect(() => {
     document.body.classList.remove("dark", "light");

@@ -2,10 +2,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./pages/RootLayout";
 import HomePage from "./pages/Home";
 import DashboardPage from "./pages/Dashboard";
-import TablesPage from "./pages/Table";
 import UserProfile from "./pages/UserProfile";
 import TablePage from "./pages/Table";
 import RootTables from "./pages/RootTables";
+import AuthenticationPage from "./pages/Authentication";
+import AuthProvider from "./store/authContext";
 
 const router = createBrowserRouter([
   {
@@ -17,29 +18,37 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: 'dashboard',
-        element: <DashboardPage />
+        path: "auth",
+        element: <AuthenticationPage />,
       },
       {
-        path: 'tables',
+        path: "dashboard",
+        element: <DashboardPage />,
+      },
+      {
+        path: "tables",
         element: <RootTables />,
         children: [
           {
-            path: ':monthId',
-            element: <TablePage />
-          }
-        ]
+            path: ":monthId",
+            element: <TablePage />,
+          },
+        ],
       },
       {
-        path: 'user',
-        element: <UserProfile />
-      }
+        path: "user",
+        element: <UserProfile />,
+      },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;
