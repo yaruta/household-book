@@ -10,15 +10,15 @@ function FormInput(props) {
 
   return (
     <div className="flex-col">
-      <div className="flex">
-        <label htmlFor={id} className="text-elements-color-main p-2 min-w-32">
+      <div className="flex justify-start">
+        <label htmlFor={id} className="text-elements-color-main p-2 ">
           {label}
         </label>
         <input
           id={id}
           {...inputProps}
           onBlur={handleBlur}
-          className="p-2 bg-sections-bg-2 text-elements-color-main"
+          className="p-2 bg-sections-bg-2 text-elements-color-main w-72"
         />
       </div>
       <span className={blured && isError ? "text-red-500" : "hidden"}>

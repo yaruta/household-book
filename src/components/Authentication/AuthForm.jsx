@@ -4,7 +4,7 @@ import {
 } from "../../firebase/auth";
 import { useState } from "react";
 import Button from "../UI/Button";
-import { Form } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
 import { isValidInput } from "../../util/validating";
 
@@ -15,6 +15,7 @@ function AuthForm({ isLogin }) {
     email: false,
     password: false,
   });
+  const navigate = useNavigate();
 
   function handleChange(event) {
     const value = event.target.value;
@@ -63,6 +64,7 @@ function AuthForm({ isLogin }) {
         setIsSubmitting(false);
         return;
       }
+      navigate("/");
     }
   }
 
@@ -70,7 +72,7 @@ function AuthForm({ isLogin }) {
     <>
       {errorMessage && <p className="text-red-500 mb-8">{errorMessage}</p>}
       <Form>
-        <div className="flex justify-between items-center gap-8">
+        <div className="flex justify-between items-center gap-8 mb-8">
           <FormInput
             label="Email"
             type="email"
@@ -92,7 +94,11 @@ function AuthForm({ isLogin }) {
             required
           />
         </div>
-        <Button onClick={handleSubmit}>{isLogin ? "Login" : "Sign up"}</Button>
+        <div className="flex justify-end">
+          <Button onClick={handleSubmit}>
+            {isLogin ? "Login" : "Sign up"}
+          </Button>
+        </div>
       </Form>
     </>
   );
