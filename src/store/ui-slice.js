@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState: { sidebarIsVisible: true, theme: "dark" },
+  initialState: { sidebarIsVisible: true, theme: "dark", formIsVisible: false },
   reducers: {
     toggleSidebar(state) {
       state.sidebarIsVisible = !state.sidebarIsVisible;
@@ -13,6 +13,9 @@ const uiSlice = createSlice({
       } else {
         state.theme = "light";
       }
+    },
+    toggleForm(state) {
+      state.formIsVisible = !state.formIsVisible;
     },
   },
 });

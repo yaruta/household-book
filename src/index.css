@@ -22,6 +22,7 @@ body {
   --yellowc: 234, 179, 8;
   --purplec: 168, 85, 247;
   --logo-color: 216, 180, 254;
+  --border-color: 37, 37, 37;
 }
 
 .light {
@@ -34,5 +35,6 @@ body {
   --yellowc: 255, 255, 122;
   --purplec: 209, 164, 252;
   --logo-color: 168, 85, 247;
+  --border-color: 215, 214, 214;
 }
 
