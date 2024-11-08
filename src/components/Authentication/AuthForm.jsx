@@ -4,9 +4,10 @@ import {
 } from "../../firebase/auth";
 import { useState } from "react";
 import Button from "../UI/Button";
-import { Form, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
 import { isValidInput } from "../../util/validating";
+
 
 function AuthForm({ isLogin }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -15,13 +16,24 @@ function AuthForm({ isLogin }) {
     email: false,
     password: false,
   });
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
+
 
   function handleChange(event) {
     const value = event.target.value;
     const name = event.target.name;
+
+    setFormValues((prevState) => {
+      return { ...prevState, [name]: value };
+    });
+
     const isValid = isValidInput(value, name);
     setErrorMessage(false);
+    
     if (!isValid) {
       setIsError((prevState) => {
         return { ...prevState, [name]: true };
@@ -33,22 +45,21 @@ function AuthForm({ isLogin }) {
     }
   }
 
+
   async function handleSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target.form);
-    const data = Object.fromEntries(formData);
-    console.log(data);
 
     if (!isSubmitting) {
       setIsSubmitting(true);
 
       try {
         if (isLogin) {
-          await doSignInWithEmailAndPassword(data.email, data.password);
+          await doSignInWithEmailAndPassword(formValues.email, formValues.password);
         } else if (!isLogin) {
-          await doCreateUserWithEmailAndPassword(data.email, data.password);
+          await doCreateUserWithEmailAndPassword(formValues.email, formValues.password);
         }
         setIsSubmitting(false);
+
       } catch (err) {
         if (err.code === "auth/invalid-credential") {
           setErrorMessage(
@@ -61,6 +72,7 @@ function AuthForm({ isLogin }) {
         } else {
           setErrorMessage(err.code);
         }
+        
         setIsSubmitting(false);
         return;
       }
@@ -68,11 +80,12 @@ function AuthForm({ isLogin }) {
     }
   }
 
+
   return (
     <>
       {errorMessage && <p className="text-red-500 mb-8">{errorMessage}</p>}
-      <Form>
-        <div className="flex justify-between items-center gap-8 mb-8">
+      <form id="auth-form">
+        <div className="flex justify-between items-start gap-8 mb-8">
           <FormInput
             label="Email"
             type="email"
@@ -95,11 +108,11 @@ function AuthForm({ isLogin }) {
           />
         </div>
         <div className="flex justify-end">
-          <Button onClick={handleSubmit}>
+          <Button onClick={handleSubmit} form="auth-form">
             {isLogin ? "Login" : "Sign up"}
           </Button>
         </div>
-      </Form>
+      </form>
     </>
   );
 }

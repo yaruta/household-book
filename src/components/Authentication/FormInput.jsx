@@ -21,7 +21,9 @@ function FormInput(props) {
           className="p-2 bg-sections-bg-2 text-elements-color-main w-72"
         />
       </div>
-      <span className={blured && isError ? "text-red-500" : "hidden"}>
+      <span
+        className={blured && isError ? "text-red-400 text-xs" : "hidden"}
+      >
         {errorMessage}
       </span>
     </div>
