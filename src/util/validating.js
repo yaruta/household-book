@@ -13,3 +13,14 @@ export function isValidInput(value, type) {
 
   return isValid;
 }
+
+export function isValidItemInput(value, type) {
+  let isValid;
+  if (type === "title") {
+    isValid = value.trim() !== "";
+  } else if (type === "amount") {
+    isValid = !isNaN(value);
+  }
+
+  return isValid;
+}

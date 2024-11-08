@@ -1,4 +1,9 @@
-function FormInputItem({ label, id, type, ...props }) {
+import { useState } from "react";
+
+function FormInputItem(props) {
+  const { label, id, type, isError, errorMessage, ...inputProps } = props;
+  const [blured, setBlured] = useState(false);
+
   let inputClasses = "";
   let labelClasses = "";
   let spanClasses = "pl-8";
@@ -21,19 +26,37 @@ function FormInputItem({ label, id, type, ...props }) {
     labelClasses = "rounded-tr-full rounded-br-full";
   }
 
+  function handleBlur() {
+    setBlured(true);
+  }
+
   return (
-    <label
-      htmlFor={id}
-      className={`w-full flex justify-center items-center text-elements-color-main border-[1px] border-border-color ${labelClasses}`}
-    >
-      <span className={`min-w-36 p-2 ${spanClasses}`}>{label}</span>
-      <input
-        id={id}
-        type={type}
-        {...props}
-        className={`bg-sections-bg-2 outline-none p-2 text-elements-color-main placeholder-gray-400 grow ${inputClasses}`}
-      />
-    </label>
+    <div className="flex-col">
+      <label
+        htmlFor={id}
+        className={`flex justify-center items-center text-elements-color-main border-[1px] border-border-color ${labelClasses}`}
+      >
+        <span className={`w-36 p-2 ${spanClasses}`}>{label}</span>
+        <input
+          id={id}
+          type={type}
+          {...inputProps}
+          onBlur={handleBlur}
+          className={`bg-sections-bg-2 outline-none p-2 text-elements-color-main placeholder-gray-400 grow ${
+            isError && isError ? "border-[1px] border-red-500" : ""
+          } ${inputClasses}`}
+        />
+      </label>
+      <div
+        className={
+          blured && isError
+            ? "text-red-400 text-xs text-end pt-[3px]"
+            : "hidden"
+        }
+      >
+        {errorMessage}
+      </div>
+    </div>
   );
 }
 

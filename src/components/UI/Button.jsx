@@ -1,6 +1,6 @@
-function Button({ children, type = "main", ...props }) {
+function Button({ children, styleType = "main", ...props }) {
   let colorClasses = "";
-  if (type === "main") {
+  if (styleType === "main") {
     colorClasses = "from-purplec to-cyan-500";
   } else {
     colorClasses = "from-gray-500 to-gray-400";

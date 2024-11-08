@@ -18,7 +18,7 @@ function Modal({ children, open, onClose }) {
     <dialog
       ref={dialog}
       onClose={onClose}
-      className="bg-gradient-to-b from-sections-bg-1 to-sections-bg-2 p-8 backdrop:bg-gradient-to-b backdrop:from-elements-color-main/5 backdrop:to-elements-color-main/10 drop-shadow-xl w-2/4 rounded-3xl"
+      className="bg-gradient-to-b from-sections-bg-1 to-sections-bg-2 p-8 backdrop:bg-gradient-to-b backdrop:from-elements-color-main/5 backdrop:to-elements-color-main/10 drop-shadow-xl w-2/4 rounded-3xl overflow-x-hidden"
     >
       {children}
     </dialog>,
