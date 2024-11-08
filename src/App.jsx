@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
 import RootLayout from "./pages/RootLayout";
 import HomePage from "./pages/Home";
 import DashboardPage from "./pages/Dashboard";
@@ -7,6 +8,7 @@ import TablePage from "./pages/Table";
 import RootTables from "./pages/RootTables";
 import AuthenticationPage from "./pages/Authentication";
 import AuthProvider from "./store/authContext";
+import { queryClient } from "./util/http";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +48,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </AuthProvider>
   );
 }

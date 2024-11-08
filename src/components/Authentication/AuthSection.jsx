@@ -9,13 +9,13 @@ function AuthSection() {
 
   return (
     <Section className="flex-col p-8 mt-16">
-      <h2 className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-red-500 mb-8 uppercase text-center">
-        Please login or sign up to continue
+      <h2 className="text-2xl text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-red-500 mb-8 uppercase text-left">
+        {`Please ${isLogin ? "login" : "sign up"} to continue`}
       </h2>
       <AuthForm isLogin={isLogin} />
       <div className="pt-4">
         {isLogin ? (
-          <p className="text-elements-color-main text-end">
+          <p className="text-elements-color-main text-start">
             New customer?{" "}
             <Link to="/auth?mode=signup" className="text-pink-500">
               Sign up
@@ -23,7 +23,7 @@ function AuthSection() {
             for an account
           </p>
         ) : (
-          <p className="text-elements-color-main text-end">
+          <p className="text-elements-color-main text-start">
             Do you already have an account?{" "}
             <Link to="/auth?mode=login" className="text-pink-500">
               Login

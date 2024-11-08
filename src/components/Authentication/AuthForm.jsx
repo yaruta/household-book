@@ -7,7 +7,8 @@ import Button from "../UI/Button";
 import { useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
 import { isValidInput } from "../../util/validating";
-
+import { createUserData } from "../../util/http";
+import { useMutation } from "@tanstack/react-query";
 
 function AuthForm({ isLogin }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,6 +23,17 @@ function AuthForm({ isLogin }) {
   });
   const navigate = useNavigate();
 
+  const {
+    mutate,
+    isPending,
+    isError: isMutationError,
+    error,
+  } = useMutation({
+    mutationFn: createUserData,
+    onSuccess: () => {
+      console.log("Success");
+    },
+  });
 
   function handleChange(event) {
     const value = event.target.value;
@@ -33,7 +45,7 @@ function AuthForm({ isLogin }) {
 
     const isValid = isValidInput(value, name);
     setErrorMessage(false);
-    
+
     if (!isValid) {
       setIsError((prevState) => {
         return { ...prevState, [name]: true };
@@ -45,7 +57,6 @@ function AuthForm({ isLogin }) {
     }
   }
 
-
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -54,12 +65,18 @@ function AuthForm({ isLogin }) {
 
       try {
         if (isLogin) {
-          await doSignInWithEmailAndPassword(formValues.email, formValues.password);
+          await doSignInWithEmailAndPassword(
+            formValues.email,
+            formValues.password
+          );
         } else if (!isLogin) {
-          await doCreateUserWithEmailAndPassword(formValues.email, formValues.password);
+          await doCreateUserWithEmailAndPassword(
+            formValues.email,
+            formValues.password
+          );
+          mutate(formValues.email);
         }
         setIsSubmitting(false);
-
       } catch (err) {
         if (err.code === "auth/invalid-credential") {
           setErrorMessage(
@@ -72,7 +89,7 @@ function AuthForm({ isLogin }) {
         } else {
           setErrorMessage(err.code);
         }
-        
+
         setIsSubmitting(false);
         return;
       }
@@ -80,12 +97,11 @@ function AuthForm({ isLogin }) {
     }
   }
 
-
   return (
     <>
       {errorMessage && <p className="text-red-500 mb-8">{errorMessage}</p>}
       <form id="auth-form">
-        <div className="flex justify-between items-start gap-8 mb-8">
+        <div className="flex justify-start items-start gap-8 mb-8">
           <FormInput
             label="Email"
             type="email"
