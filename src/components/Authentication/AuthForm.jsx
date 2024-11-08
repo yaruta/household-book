@@ -3,29 +3,35 @@ import {
   doSignInWithEmailAndPassword,
 } from "../../firebase/auth";
 import { useState } from "react";
-import Button from "../UI/Button";
 import { useNavigate } from "react-router-dom";
-import FormInput from "./FormInput";
 import { isValidInput } from "../../util/validating";
 import { createUserData } from "../../util/http";
 import { useMutation } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../store/user-slice";
+import Button from "../UI/Button";
+import FormInput from "./FormInput";
 
 function AuthForm({ isLogin }) {
+  //isSubmitting and errorMessage states to control the process of authentication with firebase functions
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [isError, setIsError] = useState({
-    email: false,
-    password: false,
-  });
+
+  //formValues and isError states for the form inputs check and submitting
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
   });
+  const [isError, setIsError] = useState({
+    email: false,
+    password: false,
+  });
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
-    mutate,
-    isPending,
+    mutateAsync,
     isError: isMutationError,
     error,
   } = useMutation({
@@ -74,8 +80,11 @@ function AuthForm({ isLogin }) {
             formValues.email,
             formValues.password
           );
-          mutate(formValues.email);
+
+          const id = await mutateAsync(formValues.email);
+          dispatch(userActions.setUserId(id));
         }
+
         setIsSubmitting(false);
       } catch (err) {
         if (err.code === "auth/invalid-credential") {
@@ -93,6 +102,7 @@ function AuthForm({ isLogin }) {
         setIsSubmitting(false);
         return;
       }
+
       navigate("/");
     }
   }

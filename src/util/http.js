@@ -16,6 +16,6 @@ export async function createUserData(email) {
   if (!response.ok) {
     throw new Error("An error occured while creating data for the user");
   }
-
-  return response.json();
+  
+  return response.json().then((name) => name.name);
 }
