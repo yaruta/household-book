@@ -7,7 +7,7 @@ import { useAuth } from "../../../store/authContext";
 
 function Header() {
   const dispatch = useDispatch();
-  const { userLoggedIn } = useAuth();
+  const { userLoggedIn, currentUser } = useAuth();
   let userPhoto = null;
 
   function handleToggleSidebar() {
@@ -23,10 +23,14 @@ function Header() {
         <span className="text-4xl">≡</span>
       </button>
       {userLoggedIn && (
-        <>
+        <div className="flex items-center justify-end gap-4">
+          <div className="flex-col">
+            <p className="text-right text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-pink-500">Max Mustermann</p>
+            <p className="text-right text-xs text-elements-color-main text-pink-500 pb-1">{currentUser.email}</p>
+          </div>
           {userPhoto && <UserPhotoIcon image={userPhoto} />}
           {!userPhoto && <DefaultAvatar isSmall />}
-        </>
+        </div>
       )}
     </header>
   );
