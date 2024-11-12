@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../../store/ui-slice";
 import { isValidItemInput } from "../../../util/validating";
-import { Form } from "react-router-dom";
 
 import Modal from "../../UI/Modal";
 import FormLine from "./FormLine";
 import Button from "../../UI/Button";
 import FormInputItem from "./FormInputItem";
+import { useMutation } from "@tanstack/react-query";
+import { addItem } from "../../../util/http";
 
 function NewItemForm() {
   const dispatch = useDispatch();
@@ -15,6 +16,19 @@ function NewItemForm() {
     title: "",
     amount: "",
   });
+
+  const {
+    mutate,
+    isPending,
+    isError: isMutationError,
+    error,
+  } = useMutation({
+    mutationFn: addItem,
+    onSuccess: () => {
+      console.log("Item added");
+    },
+  });
+  const userId = useSelector((state) => state.user.userId);
 
   function handleClose() {
     dispatch(uiActions.toggleForm());
@@ -42,10 +56,10 @@ function NewItemForm() {
       title: event.target.title.value,
       type: event.target.type.value,
       amount: event.target.amount.value,
-      date: event.target.date.value
+      date: event.target.date.value,
     };
-    console.log(item);
-
+    mutate({ userId, item });
+    handleClose();
   }
 
   return (
@@ -53,6 +67,7 @@ function NewItemForm() {
       <h2 className="w-40 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-red-500 text-2xl uppercase">
         New item
       </h2>
+      {isMutationError && <p>{error}</p>}
       <form id="item-form" className="w-full flex-col" onSubmit={handleAddItem}>
         <FormLine>
           <FormInputItem
@@ -112,8 +127,8 @@ function NewItemForm() {
           <Button styleType="secondary" type="button" onClick={handleClose}>
             Close
           </Button>
-          <Button type="submit">
-            Add Item
+          <Button type="submit" disabled={isPending}>
+            {!isPending ? "Add Item" : "Submitting"}
           </Button>
         </FormLine>
       </form>

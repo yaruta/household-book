@@ -36,9 +36,7 @@ function AuthForm({ isLogin }) {
     error,
   } = useMutation({
     mutationFn: createUserData,
-    onSuccess: () => {
-      console.log("Success");
-    },
+    onSuccess: () => {},
   });
 
   function handleChange(event) {

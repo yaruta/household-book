@@ -16,6 +16,22 @@ export async function createUserData(email) {
   if (!response.ok) {
     throw new Error("An error occured while creating data for the user");
   }
-  
+
   return response.json().then((name) => name.name);
+}
+
+export async function addItem({ userId, item }) {
+  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables.json`;
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(item),
+  });
+  if (!response.ok) {
+    throw new Error("An error occured while adding new item to the table");
+  }
+
+  return response.json();
 }
