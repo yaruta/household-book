@@ -1,11 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const defaultValue = localStorage.getItem("userId") ?? {
+  userId: null,
+};
+
 const userSlice = createSlice({
   name: "user",
-  initialState: { userId: null },
+  initialState: defaultValue,
   reducers: {
     setUserId(state, action) {
       state.userId = action.payload;
+      localStorage.setItem("userId", state.userId);
     },
   },
 });

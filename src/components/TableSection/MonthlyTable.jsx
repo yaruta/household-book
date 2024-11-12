@@ -1,33 +1,45 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import InputItem from "./InputItem";
 import Section from "../UI/Section";
+import { fetchTable } from "../../util/http";
+import { useSelector } from "react-redux";
+import { useQuery } from "@tanstack/react-query";
 
 function MonthlyTable() {
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
+  const userId = useSelector((state) => state.user.userId);
+
+  const { data, isPending, isError, error } = useQuery({
+    queryKey: ["table"],
+    queryFn: ({ signal }) => fetchTable({ userId, signal }),
+    staleTime: 1000,
+  });
+
+  let content = <p className="text-elements-color-main">"No items added."</p>;
+  if (isPending) {
+    content = <p className="text-elements-color-main">"Loading..."</p>;
+  }
+  if (isError) {
+    content = (
+      <p className="text-elements-color-main">{error || "An error occured!"}</p>
+    );
+  }
+  if (data && !isError) {
+    const items = Object.values(data);
+    content = items.map((item) => (
+      <InputItem
+        key={Math.random() * 100000}
+        date={item.date}
+        title={item.title}
+        type={item.type}
+        amount={item.amount}
+      />
+    ));
+  }
 
   return (
     <Section className="p-8 mt-8">
-      <ul className="p-0">
-        <InputItem
-          date="14.05.24"
-          title="Salary"
-          type="income"
-          amount="3445,00"
-        />
-        <InputItem
-          date="17.05.24"
-          title="Grocery"
-          type="expenses"
-          amount="45,00"
-        />
-        <InputItem date="21.05.24" title="Post" type="expenses" amount="5,40" />
-        <InputItem
-          date="25.05.24"
-          title="Print"
-          type="expenses"
-          amount="15,00"
-        />
-      </ul>
+      <ul className="p-0">{content}</ul>
     </Section>
   );
 }
