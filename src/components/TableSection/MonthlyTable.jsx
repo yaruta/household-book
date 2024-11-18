@@ -10,14 +10,14 @@ function MonthlyTable() {
   const userId = useSelector((state) => state.user.userId);
 
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ["table"],
+    queryKey: ["tables"],
     queryFn: ({ signal }) => fetchTable({ userId, signal }),
-    staleTime: 1000,
+    staleTime: 5000
   });
 
-  let content = <p className="text-elements-color-main">"No items added."</p>;
+  let content = <p className="text-gray-500">No items added</p>;
   if (isPending) {
-    content = <p className="text-elements-color-main">"Loading..."</p>;
+    content = <p className="text-elements-color-main">Loading...</p>;
   }
   if (isError) {
     content = (
@@ -28,11 +28,13 @@ function MonthlyTable() {
     const items = Object.values(data);
     content = items.map((item) => (
       <InputItem
-        key={Math.random() * 100000}
+        key={item.id}
+        id={item.id}
         date={item.date}
         title={item.title}
         type={item.type}
         amount={item.amount}
+        userId={userId}
       />
     ));
   }

@@ -2,28 +2,39 @@ import { QueryClient } from "@tanstack/react-query";
 
 export const queryClient = new QueryClient();
 
-export async function createUserData(email) {
+export async function createUserData({ email, id }) {
   const response = await fetch(
-    "https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users.json",
+    `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${id}.json`,
     {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: email }),
+      body: JSON.stringify({ email: email, id: id }),
     }
   );
   if (!response.ok) {
     throw new Error("An error occured while creating data for the user");
   }
+  return await response.json();
+}
 
-  return response.json().then((name) => name.name);
+export async function getUserId({ email }) {
+  const response = await fetch(
+    "https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users.json"
+  );
+  if (!response.ok) {
+    throw new Error("An error Occured while fetching users data");
+  }
+  const data = await response.json();
+  const user = Object.values(data).find((user) => user.email === email);
+  return user.id;
 }
 
 export async function addItem({ userId, item }) {
-  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables.json`;
+  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables/${item.id}.json`;
   const response = await fetch(url, {
-    method: "POST",
+    method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
@@ -31,6 +42,18 @@ export async function addItem({ userId, item }) {
   });
   if (!response.ok) {
     throw new Error("An error occured while adding new item to the table");
+  }
+
+  return response.json();
+}
+
+export async function removeItem({ userId, id}) {
+  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables/${id}.json`;
+  const response = await fetch(url, {
+    method: "DELETE",
+  });
+  if (!response.ok) {
+    throw new Error("An error occured while deleting item from the table");
   }
 
   return response.json();

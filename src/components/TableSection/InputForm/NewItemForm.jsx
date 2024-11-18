@@ -8,7 +8,7 @@ import FormLine from "./FormLine";
 import Button from "../../UI/Button";
 import FormInputItem from "./FormInputItem";
 import { useMutation } from "@tanstack/react-query";
-import { addItem } from "../../../util/http";
+import { addItem, queryClient } from "../../../util/http";
 
 function NewItemForm() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ function NewItemForm() {
   } = useMutation({
     mutationFn: addItem,
     onSuccess: () => {
-      console.log("Item added");
+      queryClient.invalidateQueries({ queryKey: ["tables"] });
     },
   });
   const userId = useSelector((state) => state.user.userId);
@@ -53,6 +53,7 @@ function NewItemForm() {
   function handleAddItem(event) {
     event.preventDefault();
     const item = {
+      id: Math.floor(Math.random() * 1000000000),
       title: event.target.title.value,
       type: event.target.type.value,
       amount: event.target.amount.value,

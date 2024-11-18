@@ -7,13 +7,17 @@ import UserIcon from "../../Icons/UserIcon";
 import LogoutIcon from "../../Icons/LogoutIcon";
 import { doSignOut } from "../../../firebase/auth";
 import { useAuth } from "../../../store/authContext";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../../store/user-slice";
 
 function MainNavigation() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { userLoggedIn } = useAuth();
 
   function handleLogout() {
     doSignOut();
+    dispatch(userActions.removeUserId());
     navigate("/auth?mode=login");
   }
 
