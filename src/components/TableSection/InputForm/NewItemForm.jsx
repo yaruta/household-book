@@ -9,9 +9,12 @@ import Button from "../../UI/Button";
 import FormInputItem from "./FormInputItem";
 import { useMutation } from "@tanstack/react-query";
 import { addItem, queryClient } from "../../../util/http";
+import { itemActions } from "../../../store/item-slice";
 
 function NewItemForm() {
   const dispatch = useDispatch();
+  const editValue = useSelector((state) => state.item.item);
+  console.log(editValue);
   const [isError, setIsError] = useState({
     title: "",
     amount: "",
@@ -31,6 +34,7 @@ function NewItemForm() {
   const userId = useSelector((state) => state.user.userId);
 
   function handleClose() {
+    dispatch(itemActions.removeTemporaryItem());
     dispatch(uiActions.toggleForm());
   }
 
@@ -53,7 +57,7 @@ function NewItemForm() {
   function handleAddItem(event) {
     event.preventDefault();
     const item = {
-      id: Math.floor(Math.random() * 1000000000),
+      id: editValue ? editValue.id : Math.floor(Math.random() * 1000000000),
       title: event.target.title.value,
       type: event.target.type.value,
       amount: event.target.amount.value,
@@ -80,6 +84,7 @@ function NewItemForm() {
             onChange={handleChange}
             isError={isError.title}
             errorMessage="Title can not be an empty string"
+            defaultValue={editValue ? editValue.title : ""}
             required
           />
           <FormInputItem
@@ -88,6 +93,9 @@ function NewItemForm() {
             type="radio"
             name="type"
             value="revenue"
+            defaultChecked={
+              (editValue && editValue.type === "revenue") ? true : false
+            }
             required
           />
           <FormInputItem
@@ -96,7 +104,9 @@ function NewItemForm() {
             type="radio"
             name="type"
             value="expenses"
-            defaultChecked
+            defaultChecked={
+              (editValue && editValue.type === "expenses") ? true : editValue ? false : true
+            }
             required
           />
         </FormLine>
@@ -111,6 +121,7 @@ function NewItemForm() {
             onChange={handleChange}
             isError={isError.amount}
             errorMessage="Please enter a valid amount"
+            defaultValue={editValue ? editValue.amount : ""}
             required
           />
           <FormInputItem
@@ -119,7 +130,11 @@ function NewItemForm() {
             type="date"
             name="date"
             placeholder="yyyy-mm-dd"
-            defaultValue={new Date().toISOString().substring(0, 10)}
+            defaultValue={
+              editValue
+                ? editValue.date
+                : new Date().toISOString().substring(0, 10)
+            }
             required
           />
         </FormLine>
@@ -129,7 +144,7 @@ function NewItemForm() {
             Close
           </Button>
           <Button type="submit" disabled={isPending}>
-            {!isPending ? "Add Item" : "Submitting"}
+            {!isPending ? (editValue ? "Edit Item" : "Add Item") : "Submitting"}
           </Button>
         </FormLine>
       </form>

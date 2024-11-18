@@ -1,9 +1,13 @@
 import { removeItem, queryClient } from "../../util/http";
 import { useMutation } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
 import EditIcon from "../Icons/EditIcon";
 import RemoveIcon from "../Icons/RemoveIcon";
+import { itemActions } from "../../store/item-slice";
 
 function InputItem({ id, date, title, type, amount, userId }) {
+  const dispatch = useDispatch();
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: removeItem,
     onSuccess: () => {
@@ -15,6 +19,11 @@ function InputItem({ id, date, title, type, amount, userId }) {
     mutate({ userId, id });
   };
 
+  function handleStartEdit() {
+    dispatch(itemActions.setTemporaryItem({ id, date, title, type, amount }));
+    dispatch(uiActions.toggleForm());
+  }
+
   return (
     <>
       {isPending && <p>Removing...</p>}
@@ -23,7 +32,9 @@ function InputItem({ id, date, title, type, amount, userId }) {
         <div className="flex justify-between">
           <div className="text-gray-500">{date}</div>
           <div className="w-20 flex justify-end gap-4">
-            <EditIcon />
+            <button onClick={handleStartEdit} className="outline-none">
+              <EditIcon />
+            </button>
             <button onClick={handleDelete}>
               <RemoveIcon />
             </button>

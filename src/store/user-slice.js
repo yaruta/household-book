@@ -11,12 +11,10 @@ const userSlice = createSlice({
     setUserId(state, action) {
       state.userId = action.payload;
       localStorage.setItem("userId", state.userId);
-      console.log("Set User Id to " + state.userId);
     },
     removeUserId(state) {
       state.userId = null;
       localStorage.removeItem("userId");
-      console.log("Remove User Id");
     },
   },
 });
