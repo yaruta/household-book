@@ -15,7 +15,7 @@ function BalanceItem({ amount, type }) {
       <p
         className={`text-2xl text-transparent bg-clip-text bg-gradient-to-br from-30% to-90% ${classes}`}
       >
-        {amount}
+        {`${amount/1000}k`}
       </p>
       <p>{type}</p>
     </div>

@@ -1,13 +1,16 @@
 import { fetchTable } from "../../util/http";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { filterTable } from "../../util/filter";
 import InputItem from "./InputItem";
 import Section from "../UI/Section";
+import { balanceActions } from "../../store/balance-slice";
+import { useEffect } from "react";
 
 function MonthlyTable() {
   const userId = useSelector((state) => state.user.userId);
   const selectedDate = useSelector((state) => state.date);
+  const dispatch = useDispatch();
 
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["tables"],
@@ -16,6 +19,15 @@ function MonthlyTable() {
   });
 
   let selectedData = [];
+
+  useEffect(() => {
+    if (selectedData.length > 0) {
+      dispatch(balanceActions.clearBalance());
+      dispatch(balanceActions.calculateBalance(selectedData));
+    } else {
+      dispatch(balanceActions.clearBalance());
+    }
+  }, [selectedData]);
 
   let content = <p className="text-gray-500">No items added</p>;
 

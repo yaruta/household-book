@@ -3,6 +3,7 @@ import uiReducer from "./ui-slice.js";
 import userReducer from "./user-slice.js";
 import itemReducer from "./item-slice.js";
 import dateReducer from "./date-slice.js";
+import balanceReducer from "./balance-slice.js";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     user: userReducer,
     item: itemReducer,
     date: dateReducer,
+    balance: balanceReducer,
   },
 });
 

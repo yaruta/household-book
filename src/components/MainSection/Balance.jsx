@@ -1,13 +1,23 @@
+import { useSelector } from "react-redux";
 import BalanceItem from "./BalanceItem";
+import { useLocation } from "react-router-dom";
 
 function Balance() {
-    
+  const balance = useSelector((state) => state.balance);
+  
+  const { pathname } = useLocation();
+  let cssClasses = "flex justify-between items-start mt-20";
+
+  if (pathname.startsWith("/tables")) {
+    cssClasses = "flex justify-start items-start gap-12 p-8 w-50%";
+  }
+
   return (
-    <div className="flex justify-between items-start mt-20">
-      <BalanceItem amount="65.4k" type="Balance" />
-      <BalanceItem amount="5.4k" type="Income" />
-      <BalanceItem amount="2.4k" type="Expenses" />
-    </div>
+    <article className={cssClasses}>
+      <BalanceItem amount={balance.balance} type="Balance" />
+      <BalanceItem amount={balance.income} type="Income" />
+      <BalanceItem amount={balance.expenses} type="Expenses" />
+    </article>
   );
 }
 

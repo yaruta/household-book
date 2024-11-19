@@ -1,10 +1,10 @@
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
 import Section from "../UI/Section";
-import MonthlyBalance from "./MontlyBalance";
 import MonthlyTable from "./MonthlyTable";
 import Button from "../UI/Button";
 import NewItemForm from "./InputForm/NewItemForm";
-import { useDispatch, useSelector } from "react-redux";
-import { uiActions } from "../../store/ui-slice";
+import Balance from "../MainSection/Balance";
 
 function TableSection() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function TableSection() {
     <>
       {formIsVisible && <NewItemForm />}
       <Section className="flex justify-between items-center gap-12 mt-8">
-        <MonthlyBalance />
+        <Balance />
         <div className="w-50% flex justify-center items-center mr-8">
           <Button onClick={handleToggleForm}>Add new item</Button>
         </div>
