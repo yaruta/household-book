@@ -15,6 +15,10 @@ function MainNavigation() {
   const dispatch = useDispatch();
   const { userLoggedIn } = useAuth();
 
+  const currentMonth = new Date().toLocaleDateString("en-US", {
+    month: "short"
+  });
+
   function handleLogout() {
     doSignOut();
     dispatch(userActions.removeUserId());
@@ -29,7 +33,7 @@ function MainNavigation() {
             <HomeIcon />
             <span>Main</span>
           </NavItem>
-          <NavItem path="/tables/may">
+          <NavItem path={`/tables/${currentMonth}`}>
             <TablesIcon />
             <span>Tables</span>
           </NavItem>

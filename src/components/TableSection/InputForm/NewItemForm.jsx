@@ -58,7 +58,6 @@ function NewItemForm() {
     const id = `${event.target.date.value.replaceAll("-", "")}${Math.floor(
       Math.random() * 100000
     )}`;
-    console.log(id);
     const item = {
       id: editValue ? editValue.id : id,
       title: event.target.title.value,

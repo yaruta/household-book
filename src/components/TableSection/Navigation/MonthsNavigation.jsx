@@ -4,18 +4,18 @@ function MonthsNavigation() {
   return (
     <nav>
       <ul className="flex justify-between items-center gap-8">
-        <MonthItem title="Jan" path="/tables/jan" />
-        <MonthItem title="Feb" path="/tables/feb" />
-        <MonthItem title="Mar" path="/tables/mar" />
-        <MonthItem title="Apr" path="/tables/apr" />
-        <MonthItem title="May" path="/tables/may" />
-        <MonthItem title="Jun" path="/tables/jun" />
-        <MonthItem title="Jul" path="/tables/jul" />
-        <MonthItem title="Aug" path="/tables/aug" />
-        <MonthItem title="Sep" path="/tables/sep" />
-        <MonthItem title="Oct" path="/tables/oct" />
-        <MonthItem title="Nov" path="/tables/nov" />
-        <MonthItem title="Dec" path="/tables/dec" />
+        <MonthItem title="Jan" path="/tables/jan" index="01"/>
+        <MonthItem title="Feb" path="/tables/feb" index="02"/>
+        <MonthItem title="Mar" path="/tables/mar" index="03"/>
+        <MonthItem title="Apr" path="/tables/apr" index="04"/>
+        <MonthItem title="May" path="/tables/may" index="05"/>
+        <MonthItem title="Jun" path="/tables/jun" index="06"/>
+        <MonthItem title="Jul" path="/tables/jul" index="07"/>
+        <MonthItem title="Aug" path="/tables/aug" index="08"/>
+        <MonthItem title="Sep" path="/tables/sep" index="09"/>
+        <MonthItem title="Oct" path="/tables/oct" index="10"/>
+        <MonthItem title="Nov" path="/tables/nov" index="11"/>
+        <MonthItem title="Dec" path="/tables/dec" index="12"/>
       </ul>
     </nav>
   );
