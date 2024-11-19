@@ -14,7 +14,6 @@ import { itemActions } from "../../../store/item-slice";
 function NewItemForm() {
   const dispatch = useDispatch();
   const editValue = useSelector((state) => state.item.item);
-  console.log(editValue);
   const [isError, setIsError] = useState({
     title: "",
     amount: "",
@@ -56,8 +55,12 @@ function NewItemForm() {
 
   function handleAddItem(event) {
     event.preventDefault();
+    const id = `${event.target.date.value.replaceAll("-", "")}${Math.floor(
+      Math.random() * 100000
+    )}`;
+    console.log(id);
     const item = {
-      id: editValue ? editValue.id : Math.floor(Math.random() * 1000000000),
+      id: editValue ? editValue.id : id,
       title: event.target.title.value,
       type: event.target.type.value,
       amount: event.target.amount.value,
@@ -94,7 +97,7 @@ function NewItemForm() {
             name="type"
             value="revenue"
             defaultChecked={
-              (editValue && editValue.type === "revenue") ? true : false
+              editValue && editValue.type === "revenue" ? true : false
             }
             required
           />
@@ -105,7 +108,11 @@ function NewItemForm() {
             name="type"
             value="expenses"
             defaultChecked={
-              (editValue && editValue.type === "expenses") ? true : editValue ? false : true
+              editValue && editValue.type === "expenses"
+                ? true
+                : editValue
+                ? false
+                : true
             }
             required
           />
