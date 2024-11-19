@@ -15,6 +15,8 @@ function MonthlyTable() {
     staleTime: 5000,
   });
 
+  let selectedData = [];
+
   let content = <p className="text-gray-500">No items added</p>;
 
   if (isPending) {
@@ -28,7 +30,10 @@ function MonthlyTable() {
   }
 
   if (data && !isError) {
-    const selectedData = filterTable(data, selectedDate);
+    selectedData = filterTable(data, selectedDate);
+  }
+
+  if (selectedData.length > 0) {
     content = selectedData.map((item) => (
       <InputItem
         key={item.id}
