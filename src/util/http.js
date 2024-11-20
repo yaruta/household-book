@@ -47,7 +47,7 @@ export async function addItem({ userId, item }) {
   return response.json();
 }
 
-export async function removeItem({ userId, id}) {
+export async function removeItem({ userId, id }) {
   const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables/${id}.json`;
   const response = await fetch(url, {
     method: "DELETE",
@@ -67,6 +67,51 @@ export async function fetchTable({ userId, signal }) {
     throw new Error("An error occured while fetching the table");
   }
 
+  const data = await response.json();
+  return data;
+}
+
+export async function addUserInfo({ userId, user }) {
+  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/user-info.json`;
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(user),
+  });
+  if (!response.ok) {
+    throw new Error("An error occured while adding user info");
+  }
+
+  return response.json();
+}
+
+export async function getUserInfo({ userId }) {
+  const response = await fetch(
+    `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/user-info.json`
+  );
+  if (!response.ok) {
+    throw new Error("An error occured while fetching users data");
+  }
+  const data = await response.json();
+  return data;
+}
+
+export async function addUserPhoto({userId, formData}) {
+  const response = await fetch(
+    `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/user-info/photo.json`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      body: { ...formData },
+    }
+  );
+  if (!response.ok) {
+    throw new Error("An error occured while editing users data");
+  }
   const data = await response.json();
   return data;
 }

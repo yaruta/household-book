@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const defaultValue = {userId: localStorage.getItem("userId")} ?? {
+const defaultValue = { userId: localStorage.getItem("userId") } ?? {
   userId: null,
+  userImage: null,
 };
 
 const userSlice = createSlice({
@@ -15,6 +16,9 @@ const userSlice = createSlice({
     removeUserId(state) {
       state.userId = null;
       localStorage.removeItem("userId");
+    },
+    setUserImage(state, action) {
+      state.userImage = action.payload;
     },
   },
 });

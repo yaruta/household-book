@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState: { sidebarIsVisible: true, theme: "dark", formIsVisible: false },
+  initialState: { sidebarIsVisible: true, theme: "dark", formIsVisible: false, imageIsLoading: false },
   reducers: {
     toggleSidebar(state) {
       state.sidebarIsVisible = !state.sidebarIsVisible;
@@ -17,6 +17,12 @@ const uiSlice = createSlice({
     toggleForm(state) {
       state.formIsVisible = !state.formIsVisible;
     },
+    setImageIsLoading(state) {
+      state.imageIsLoading = true;
+    },
+    setImageIsNotLoading(state) {
+      state.imageIsLoading = false;
+    }
   },
 });
 

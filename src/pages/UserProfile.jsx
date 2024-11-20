@@ -1,5 +1,7 @@
+import UserProfileSection from "../components/UserProfile/UserProfileSection";
+
 function UserProfile() {
-    return <h1>User Profile</h1>
+  return <UserProfileSection />;
 }
 
 export default UserProfile;
