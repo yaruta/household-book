@@ -6,7 +6,7 @@ import Section from "../UI/Section";
 import UserFormInput from "./UserFormInput";
 import UserFormLine from "./UserFormLine";
 import EditUserAvatar from "./EditUserAvatar";
-import UserAvatar from "./UserAvatar";
+import UserAvatar from "../UI/UserAvatar";
 
 function UserProfileSection() {
   const { currentUser } = useAuth();
