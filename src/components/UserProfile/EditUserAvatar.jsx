@@ -6,6 +6,7 @@ import PhotoIcon from "../Icons/PhotoIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import { useState } from "react";
+import { userActions } from "../../store/user-slice";
 
 function EditUserAvatar() {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function EditUserAvatar() {
     uploadBytes(imageRef, imageFileUpload).then(() => {
       setImageFileUpload(null);
       dispatch(uiActions.setImageIsNotLoading());
+      dispatch(userActions.setIsUpdated());
     });
   };
 
@@ -60,10 +62,13 @@ function EditUserAvatar() {
           />
         </div>
         <div className="flex gap-4">
-          <button type="button" className="text-elements-color-main">
+          <button type="button" className="text-gray-500 hover:text-cyan-500">
             Delete
           </button>
-          <button type="submit" className="text-elements-color-main">
+          <button
+            type="submit"
+            className="text-elements-color-main hover:text-purple-500"
+          >
             Update
           </button>
         </div>

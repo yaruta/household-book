@@ -98,20 +98,4 @@ export async function getUserInfo({ userId }) {
   return data;
 }
 
-export async function addUserPhoto({userId, formData}) {
-  const response = await fetch(
-    `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/user-info/photo.json`,
-    {
-      method: "PUT",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-      body: { ...formData },
-    }
-  );
-  if (!response.ok) {
-    throw new Error("An error occured while editing users data");
-  }
-  const data = await response.json();
-  return data;
-}
+

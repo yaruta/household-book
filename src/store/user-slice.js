@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const defaultValue = {
   userId: localStorage.getItem("userId") ?? null,
   userImage: localStorage.getItem("userPhoto") ?? null,
+  isUpdated: false,
 };
 
 const userSlice = createSlice({
@@ -20,6 +21,12 @@ const userSlice = createSlice({
     setUserImage(state, action) {
       state.userImage = action.payload;
       localStorage.setItem("userPhoto", state.userImage);
+    },
+    setIsUpdated(state) {
+      state.isUpdated = true;
+    },
+    removeIsUpdated(state) {
+      state.isUpdated = false;
     },
   },
 });
