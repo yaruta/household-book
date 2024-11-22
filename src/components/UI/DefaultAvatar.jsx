@@ -1,13 +1,23 @@
 import AvatarIcon from "../Icons/AvatarIcon";
 
-function DefaultAvatar({ isSmall }) {
-  let smallAvatarClasses = "w-10 h-10 rounded-full p-[2px] flex justify-center items-center bg-gradient-to-br from-purplec via-redc to-yellowc";
-  let bigAvatarClasses =
-    "w-16 h-16 flex justify-center items-center bg-gradient-to-br rounded-full from-purplec via-redc to-yellowc p-[3px]";
+function DefaultAvatar({ size = "big" }) {
+  let containerClasses =
+    "rounded-full flex justify-center items-center bg-gradient-to-br";
+  let iconSize = 60;
+
+  if (size === "small") {
+    containerClasses += " w-10 h-10  from-purplec via-redc to-yellowc";
+  } else if (size === "middle") {
+    containerClasses += " w-16 h-16  from-purplec via-redc to-yellowc ";
+    iconSize = 88;
+  } else {
+    containerClasses += " w-44 h-44 from-pink-500 to-purple-500 ";
+    iconSize = 212;
+  }
 
   return (
-    <div className={isSmall ? smallAvatarClasses : bigAvatarClasses}>
-        <AvatarIcon size={isSmall ? 40 : 96}/>
+    <div className={containerClasses}>
+      <AvatarIcon size={iconSize} />
     </div>
   );
 }

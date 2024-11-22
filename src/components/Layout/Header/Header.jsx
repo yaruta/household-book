@@ -8,7 +8,8 @@ import UserAvatar from "../../UI/UserAvatar";
 function Header() {
   const dispatch = useDispatch();
   const { userLoggedIn, currentUser } = useAuth();
-  const userPhoto = useSelector((state) => state.user.userImage);
+  const {isImageAvailable} = useSelector((state) => state.user);
+
 
   function handleToggleSidebar() {
     dispatch(uiActions.toggleSidebar());
@@ -32,8 +33,8 @@ function Header() {
               {currentUser.email}
             </p>
           </div>
-          {userPhoto && <UserAvatar size="small" />}
-          {!userPhoto && <DefaultAvatar isSmall />}
+          {isImageAvailable && <UserAvatar size="small" />}
+          {!isImageAvailable && <DefaultAvatar size="small" />}
         </div>
       )}
     </header>

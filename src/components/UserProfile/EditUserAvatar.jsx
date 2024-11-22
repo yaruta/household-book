@@ -1,12 +1,13 @@
-import { uploadBytes } from "firebase/storage";
+import { deleteObject, uploadBytes } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
 import { ref } from "firebase/storage";
 
-import PhotoIcon from "../Icons/PhotoIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import { useState } from "react";
 import { userActions } from "../../store/user-slice";
+
+import PhotoIcon from "../Icons/PhotoIcon";
 
 function EditUserAvatar() {
   const dispatch = useDispatch();
@@ -23,13 +24,35 @@ function EditUserAvatar() {
     if (imageFileUpload === null) {
       return;
     }
+
     const imageRef = ref(storage, `images/${userId}/profileImage`);
     dispatch(uiActions.setImageIsLoading());
+
     uploadBytes(imageRef, imageFileUpload).then(() => {
       setImageFileUpload(null);
+      dispatch(userActions.setIsImageAvailable());
       dispatch(uiActions.setImageIsNotLoading());
       dispatch(userActions.setIsUpdated());
-    });
+    }).catch((error) => {
+      window.alert(
+        "An error occured by editing the user photo. Please try again later."
+      );
+    });;
+  };
+
+  const handleDeletePhoto = async () => {
+    const imageRef = ref(storage, `images/${userId}/profileImage`);
+
+    deleteObject(imageRef)
+      .then(() => {
+        dispatch(userActions.removeUserImage());
+        dispatch(userActions.removeIsImageAvailable());
+      })
+      .catch((error) => {
+        window.alert(
+          "An error occured by deleting the user photo. Please try again later."
+        );
+      });
   };
 
   return (
@@ -62,7 +85,11 @@ function EditUserAvatar() {
           />
         </div>
         <div className="flex gap-4">
-          <button type="button" className="text-gray-500 hover:text-cyan-500">
+          <button
+            type="button"
+            className="text-gray-500 hover:text-cyan-500"
+            onClick={handleDeletePhoto}
+          >
             Delete
           </button>
           <button

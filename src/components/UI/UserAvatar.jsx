@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
-import useUserPhoto from "../../hooks/user-photo";
+import {useLoadUserPhoto} from "../../hooks/load-user-photo";
 
 function UserAvatar({ size = "big" }) {
-  const userImage = useUserPhoto();
+  useLoadUserPhoto();
   const isLoading = useSelector((state) => state.ui.imageIsLoading);
+  const { userImage } = useSelector((state) => state.user);
 
   let containerClasses =
     "rounded-full flex justify-center items-center bg-gradient-to-br";

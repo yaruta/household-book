@@ -1,5 +1,6 @@
 import { useAuth } from "../../store/authContext";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../UI/Button";
 import Section from "../UI/Section";
@@ -7,10 +8,14 @@ import UserFormInput from "./UserFormInput";
 import UserFormLine from "./UserFormLine";
 import EditUserAvatar from "./EditUserAvatar";
 import UserAvatar from "../UI/UserAvatar";
+import DefaultAvatar from "../UI/DefaultAvatar";
+
 
 function UserProfileSection() {
   const { currentUser } = useAuth();
   const [isEdit, setIsEdit] = useState(false);
+
+  const { isImageAvailable } = useSelector((state) => state.user);
 
   const handleStartEdit = () => {
     setIsEdit(true);
@@ -19,10 +24,11 @@ function UserProfileSection() {
   const handleEdit = () => {
     setIsEdit(false);
   };
-  
+
   return (
     <Section className="flex gap-16 p-8 mt-16">
-      <UserAvatar />
+      {isImageAvailable && <UserAvatar />}
+      {!isImageAvailable && <DefaultAvatar />}
       <article className="flex-col text-elements-color-main w-full">
         <UserFormLine className="mb-12">
           <div>
@@ -43,7 +49,7 @@ function UserProfileSection() {
         </UserFormLine>
         <UserFormInput label="First Name:" id="firstName" isEdit={isEdit} />
         <UserFormInput label="Last Name:" id="lastName" isEdit={isEdit} />
-        <EditUserAvatar/>
+        <EditUserAvatar />
       </article>
     </Section>
   );

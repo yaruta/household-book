@@ -1,14 +1,16 @@
-function AvatarIcon({size}) {
+function AvatarIcon({ size }) {
   return (
-    <div className="w-16 h-16 flex justify-center items-center">
+    <div
+      className={`w-[${size}px] h-[${size}px] flex justify-center items-center`}
+    >
       <svg
         id="fi_17932540"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         data-name="Layer 1"
-        width={size}
-        height={size}
+        width={size - 20}
+        height={size - 20}
       >
         <clipPath id="clippath">
           <circle cx="12" cy="12" r="10"></circle>
