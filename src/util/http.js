@@ -71,14 +71,14 @@ export async function fetchTable({ userId, signal }) {
   return data;
 }
 
-export async function addUserInfo({ userId, user }) {
+export async function addUserInfo({ userId, userData }) {
   const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/user-info.json`;
   const response = await fetch(url, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(user),
+    body: JSON.stringify(userData),
   });
   if (!response.ok) {
     throw new Error("An error occured while adding user info");
@@ -87,9 +87,10 @@ export async function addUserInfo({ userId, user }) {
   return response.json();
 }
 
-export async function getUserInfo({ userId }) {
+export async function getUserInfo({ signal, userId }) {
   const response = await fetch(
-    `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/user-info.json`
+    `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/user-info.json`,
+    { signal }
   );
   if (!response.ok) {
     throw new Error("An error occured while fetching users data");
@@ -97,5 +98,3 @@ export async function getUserInfo({ userId }) {
   const data = await response.json();
   return data;
 }
-
-

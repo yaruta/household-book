@@ -5,6 +5,7 @@ const defaultValue = {
   userImage: localStorage.getItem("userPhoto") ?? null,
   isImageAvailable: localStorage.getItem("userPhoto") ? true : false,
   isUpdated: false,
+  userName: { firstName: "Unknown", lastName: "" },
 };
 
 const userSlice = createSlice({
@@ -38,6 +39,10 @@ const userSlice = createSlice({
     },
     removeIsUpdated(state) {
       state.isUpdated = false;
+    },
+    setUserName(state, action) {
+      state.userName.firstName = action.payload.firstName;
+      state.userName.lastName = action.payload.lastName;
     },
   },
 });
