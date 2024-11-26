@@ -9,6 +9,7 @@ import RootTables from "./pages/RootTables";
 import AuthenticationPage from "./pages/Authentication";
 import AuthProvider from "./store/authContext";
 import { queryClient } from "./util/http";
+import RootDashboard from "./pages/RootDashboard";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,13 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: <DashboardPage />,
+        element: <RootDashboard />,
+        children: [
+          {
+            path: ":statType",
+            element: <DashboardPage />,
+          }
+        ]
       },
       {
         path: "tables",

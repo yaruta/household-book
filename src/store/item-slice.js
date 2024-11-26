@@ -7,7 +7,6 @@ const itemSlice = createSlice({
   reducers: {
     setTemporaryItem(state, action) {
       state.item = action.payload;
-      console.log("Item " + state.item);
     },
     removeTemporaryItem(state) {
       state.item = null;

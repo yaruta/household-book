@@ -8,10 +8,11 @@ import { itemActions } from "../../store/item-slice";
 
 function InputItem({ id, date, title, type, amount, userId }) {
   const dispatch = useDispatch();
+  const selectedDate = date.substring(0, 7).replace("-", "");
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: removeItem,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["tables"] });
+      queryClient.invalidateQueries({ queryKey: ["tables", selectedDate] });
     },
   });
 

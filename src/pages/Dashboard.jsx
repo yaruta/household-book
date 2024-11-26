@@ -1,5 +1,7 @@
+import StatisticsSection from "../components/Statistics/StatisticsSection";
+
 function DashboardPage() {
-  return <h1>Dashboard</h1>;
+  return <StatisticsSection />;
 }
 
 export default DashboardPage;

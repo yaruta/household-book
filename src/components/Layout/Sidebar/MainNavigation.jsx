@@ -33,7 +33,7 @@ function MainNavigation() {
             <TablesIcon />
             <span>Tables</span>
           </NavItem>
-          <NavItem path="/dashboard">
+          <NavItem path="/dashboard/year">
             <DashboardIcon />
             <span>Dashboard</span>
           </NavItem>

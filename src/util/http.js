@@ -32,7 +32,8 @@ export async function getUserId({ email }) {
 }
 
 export async function addItem({ userId, item }) {
-  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables/${item.id}.json`;
+  const date = item.id.substring(0, 6);
+  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables/${date}/${item.id}.json`;
   const response = await fetch(url, {
     method: "PUT",
     headers: {
@@ -48,7 +49,8 @@ export async function addItem({ userId, item }) {
 }
 
 export async function removeItem({ userId, id }) {
-  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables/${id}.json`;
+  const date = id.substring(0, 6);
+  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables/${date}/${id}.json`;
   const response = await fetch(url, {
     method: "DELETE",
   });
@@ -59,12 +61,24 @@ export async function removeItem({ userId, id }) {
   return response.json();
 }
 
-export async function fetchTable({ userId, signal }) {
-  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables.json`;
+export async function fetchTable({ userId, signal, selectedDate }) {
+  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables/${selectedDate}.json`;
   const response = await fetch(url, { signal });
 
   if (!response.ok) {
     throw new Error("An error occured while fetching the table");
+  }
+
+  const data = await response.json();
+  return data;
+}
+
+export async function fetchTables({ userId, signal }) {
+  const url = `https://household-book-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/tables.json`;
+  const response = await fetch(url, { signal });
+
+  if (!response.ok) {
+    throw new Error("An error occured while fetching the tables");
   }
 
   const data = await response.json();
