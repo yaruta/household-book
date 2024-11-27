@@ -16,7 +16,7 @@ function BarTypeChart({ data, dataKeys }) {
           <LinearGradient />
         </defs>
         <XAxis dataKey="name" />
-        <YAxis />
+        <YAxis type="number" domain={[0, 6000]} />
         <CartesianGrid
           strokeDasharray="4 4"
           strokeOpacity={0.2}

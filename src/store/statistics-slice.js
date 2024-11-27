@@ -24,6 +24,17 @@ for (let i = 0; i < 30; i++) {
     balance: 0,
   });
 }
+
+const weekDefaultValue = [
+  { name: "Mon", revenue: 0, expenses: 0, balance: 0 },
+  { name: "Tue", revenue: 0, expenses: 0, balance: 0 },
+  { name: "Wed", revenue: 0, expenses: 0, balance: 0 },
+  { name: "Thu", revenue: 0, expenses: 0, balance: 0 },
+  { name: "Fri", revenue: 0, expenses: 0, balance: 0 },
+  { name: "Sat", revenue: 0, expenses: 0, balance: 0 },
+  { name: "Sun", revenue: 0, expenses: 0, balance: 0 },
+];
+
 const defaultValue = {
   type: "year",
   value: yearDefaultValue,
@@ -40,6 +51,8 @@ const statisticsSlice = createSlice({
         state.value = monthDefaultValue;
       } else if (type === "year") {
         state.value = yearDefaultValue;
+      } else if (type === "week") {
+        state.value = weekDefaultValue;
       }
     },
     setBalance(state, action) {
@@ -47,8 +60,9 @@ const statisticsSlice = createSlice({
       if (state.type === "year") {
         index = parseInt(action.payload.date.substring(4, 6)) - 1;
       } else if (state.type === "month") {
-        index = parseInt(action.payload.date.substring(6, 8)) - 1;
-        console.log(index);
+        index = parseInt(action.payload.item.date.substring(8, 10));
+      } else if (state.type === "week") {
+        index = parseInt(action.payload.weekDay);
       }
       const amount = parseFloat(action.payload.item.amount);
       const selectedElement = state.value[index];
@@ -66,6 +80,8 @@ const statisticsSlice = createSlice({
         state.value = monthDefaultValue;
       } else if (state.type === "year") {
         state.value = yearDefaultValue;
+      } else if (state.type === "week") {
+        state.value = weekDefaultValue;
       }
     },
   },

@@ -7,10 +7,13 @@ import AreaTypeChart from "./AreaTypeChart";
 import BarTypeChart from "./BarTypeChart";
 import { statisticsActions } from "../../store/statistics-slice";
 import { useEffect } from "react";
+import { getWeekNumber } from "../../util/date";
 
 function StatisticsSection() {
   const userId = useSelector((state) => state.user.userId);
   const tablesData = useSelector((state) => state.statistics.value);
+  const statisticsType = useSelector((state) => state.statistics.type);
+  const { year, month, week } = useSelector((state) => state.date);
   const dispatch = useDispatch();
 
   const { data, isError } = useQuery({
@@ -22,14 +25,43 @@ function StatisticsSection() {
   useEffect(() => {
     if (data && !isError) {
       dispatch(statisticsActions.clearBalance());
-      Object.values(data).map((month, index) => {
-        const date = Object.keys(data)[index];
-        Object.values(month).map((item) => {
-          dispatch(statisticsActions.setBalance({ date, item }));
+      if (statisticsType === "year") {
+        Object.values(data).map((month, index) => {
+          const date = Object.keys(data)[index];
+          const itemYear = date.substring(0, 4);
+          if (year !== itemYear) {
+            return;
+          }
+          Object.values(month).map((item) => {
+            dispatch(statisticsActions.setBalance({ date, item }));
+          });
         });
-      });
+      } else if (statisticsType === "month") {
+        Object.values(data).map((monthTable, index) => {
+          const itemMonth = Object.keys(data)[index].substring(4, 6);
+          const itemYear = Object.keys(data)[index].substring(0, 4);
+          if (month.toString() !== itemMonth || year !== itemYear) {
+            return;
+          }
+          Object.values(monthTable).map((item) => {
+            dispatch(statisticsActions.setBalance({ month, item }));
+          });
+        });
+      } else if (statisticsType === "week") {
+        Object.values(data).map((monthTable) => {
+          Object.values(monthTable).map((item) => {
+            const itemDate = new Date(item.date);
+            const itemWeekNumber = getWeekNumber(itemDate);
+
+            if (itemWeekNumber === week) {
+              const weekDay = itemDate.getDay() - 1;
+              dispatch(statisticsActions.setBalance({ weekDay, item }));
+            }
+          });
+        });
+      }
     }
-  }, [data]);
+  }, [data, statisticsType, month, year, week]);
 
   return (
     <div className="flex justify-between items-center gap-2">

@@ -1,9 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { dateActions } from "../../../store/date-slice";
 
 function YearsNavigation() {
   const currentYear = new Date().getFullYear();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(dateActions.setSelectedYear(currentYear));
+  }, []);
 
   const handleSelectYear = (event) => {
     dispatch(dateActions.setSelectedYear(event.target.value));

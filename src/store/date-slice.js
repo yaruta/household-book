@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getWeekNumber } from "../util/date";
 
 const currentDate = new Date();
 const defaultValue = {
   year: currentDate.getFullYear().toString(),
-  month: (currentDate.getMonth()+1).toString(),
+  month: (currentDate.getMonth() + 1).toString(),
+  week: getWeekNumber(currentDate),
 };
 
 const dateSlice = createSlice({
@@ -15,6 +17,9 @@ const dateSlice = createSlice({
     },
     setSelectedMonth(state, action) {
       state.month = action.payload;
+    },
+    setSelectedWeek(state, action) {
+      state.week = action.payload;
     },
   },
 });
