@@ -1,6 +1,6 @@
 import mainPageImage from "../../assets/image-for-main-page.png";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTable } from "../../util/http";
+import { fetchTables } from "../../util/http";
 import { useQuery } from "@tanstack/react-query";
 import { balanceActions } from "../../store/balance-slice";
 import Balance from "./Balance";
@@ -14,7 +14,7 @@ function MainSection() {
 
   const { data } = useQuery({
     queryKey: ["tables"],
-    queryFn: ({ signal }) => fetchTable({ userId, signal }),
+    queryFn: ({ signal }) => fetchTables({ userId, signal }),
     staleTime: 5000,
   });
 

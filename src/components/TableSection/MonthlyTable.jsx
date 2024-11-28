@@ -21,7 +21,7 @@ function MonthlyTable() {
   useEffect(() => {
     if (data && !isError) {
       dispatch(balanceActions.clearBalance());
-      dispatch(balanceActions.calculateBalance(Object.values(data)));
+      dispatch(balanceActions.calculateMonthlyBalance(Object.values(data)));
     } else {
       dispatch(balanceActions.clearBalance());
     }
