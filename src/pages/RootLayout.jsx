@@ -2,9 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import Header from "../components/Layout/Header/Header";
 import Sidebar from "../components/Layout/Sidebar/Sidebar";
 import ColorThemeNav from "../components/Layout/ColorThemeSidebar/ColorThemeNav";
-import { useSelector, useDispatch } from "react-redux";
-import { userActions } from "../store/user-slice";
-import { useQuery } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useAuth } from "../store/authContext";
 
@@ -12,8 +10,6 @@ function RootLayout() {
   const { userLoggedIn } = useAuth();
   const { sidebarIsVisible, theme } = useSelector((state) => state.ui);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { userId } = useSelector((state) => state.user);
 
   useEffect(() => {
     if (!userLoggedIn) {
