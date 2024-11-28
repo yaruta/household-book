@@ -9,16 +9,16 @@ function FormInput(props) {
   }
 
   return (
-    <div className="flex-col">
-      <div className="flex justify-start">
-        <label htmlFor={id} className="text-elements-color-main p-2 ">
+    <div className="flex-col w-full">
+      <div className="flex justify-start w-full max-sm:flex-col max-sm:items-start">
+        <label htmlFor={id} className="text-elements-color-main p-2 min-w-24">
           {label}
         </label>
         <input
           id={id}
           {...inputProps}
           onBlur={handleBlur}
-          className="p-2 bg-sections-bg-2 text-elements-color-main w-72"
+          className="p-2 bg-sections-bg-2 text-elements-color-main w-72 max-xl:w-64 max-lg:w-full"
         />
       </div>
       <span

@@ -17,7 +17,7 @@ function TableSection() {
   return (
     <>
       {formIsVisible && <NewItemForm />}
-      <Section className="flex justify-between items-center gap-12 mt-8">
+      <Section className="flex justify-between items-center gap-12 mt-8 max-lg:gap-8">
         <Balance />
         <div className="w-50% flex justify-center items-center mr-8">
           <Button onClick={handleToggleForm}>Add new item</Button>

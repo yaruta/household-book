@@ -114,8 +114,8 @@ function AuthForm({ isLogin }) {
       {isMutationError && (
         <p>Didn't manage to create user. Please try again later.</p>
       )}
-      <form id="auth-form">
-        <div className="flex justify-start items-start gap-8 mb-8">
+      <form id="auth-form" className="w-full">
+        <div className="flex justify-between items-start gap-8 mb-8 w-full max-lg:flex-col">
           <FormInput
             label="Email"
             type="email"

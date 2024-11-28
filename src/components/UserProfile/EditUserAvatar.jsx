@@ -56,15 +56,15 @@ function EditUserAvatar() {
   };
 
   return (
-    <div className="flex justify-start gap-8 mt-16">
-      <div className="w-1/3">
+    <div className="flex justify-start gap-8 mt-16 max-lg:flex-col">
+      <div className="w-1/3 max-lg:w-full max-lg:flex max-lg:justify-between max-lg:items-center">
         <h2 className="uppercase text-xl font-bold">Your photo</h2>
-        <p className="text-gray-500">Update your photo</p>
+        <p className="text-gray-500 max-md:hidden">Update your photo</p>
       </div>
       <form
         id="user-info"
         onSubmit={handleAddPhoto}
-        className="flex items-start justify-between w-2/3"
+        className="flex items-start justify-between w-2/3 max-lg:w-full"
       >
         <div>
           <label htmlFor="userImageFile">

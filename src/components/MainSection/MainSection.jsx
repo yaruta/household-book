@@ -27,14 +27,14 @@ function MainSection() {
 
   return (
     <Section className="flex justify-between items-start gap-8 p-8 mt-16">
-      <article className="h-8 w-100 flex-col">
+      <article className="w-100 flex-col max-sm:w-full">
         <Greeting />
         <Balance />
       </article>
       <img
         src={mainPageImage}
         alt="a women is sitting at a computer"
-        className="w-60 h-60"
+        className="w-60 h-60 max-lg:hidden"
       />
     </Section>
   );

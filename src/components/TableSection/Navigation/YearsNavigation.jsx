@@ -17,7 +17,7 @@ function YearsNavigation() {
   return (
     <select
       name="year"
-      className="bg-sections-bg-1 text-elements-color-main p-1 pl-8 pr-8 rounded-full outline-none"
+      className="bg-sections-bg-1 text-elements-color-main p-1 pl-8 pr-8 rounded-full outline-none max-lg:bg-sections-bg-2"
       onChange={handleSelectYear}
       defaultValue={currentYear}
     >

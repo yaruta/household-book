@@ -1,6 +1,5 @@
 function BalanceItem({ amount, type }) {
-
-  let classes="";
+  let classes = "";
 
   if (type === "Balance") {
     classes = "from-purple-500 to-pink-500";
@@ -11,13 +10,13 @@ function BalanceItem({ amount, type }) {
   }
 
   return (
-    <div className="text-elements-color-main flex-col self-end ">
+    <div className="text-elements-color-main flex-col self-end max-sm:w-full max-sm:pb-4">
       <p
-        className={`text-2xl text-transparent bg-clip-text bg-gradient-to-br from-30% to-90% ${classes}`}
+        className={`text-2xl text-transparent bg-clip-text bg-gradient-to-br from-30% to-90% ${classes} max-sm:text-center`}
       >
-        {`${amount/1000}k`}
+        {`${amount / 1000}k`}
       </p>
-      <p>{type}</p>
+      <p className="max-sm:text-center">{type}</p>
     </div>
   );
 }

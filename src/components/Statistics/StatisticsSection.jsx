@@ -76,7 +76,7 @@ function StatisticsSection() {
   }, [data, statisticsType, month, year, week]);
 
   return (
-    <div className="flex justify-between items-center gap-2">
+    <div className="flex justify-between items-center gap-2 max-lg:flex-col max-lg:justify-center max-lg:ml-12 max-lg:mr-12">
       <Section className="w-full h-80 p-4">
         <AreaTypeChart data={tablesData} dataKeys={["balance"]} />
       </Section>

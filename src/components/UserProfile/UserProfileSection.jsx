@@ -65,14 +65,14 @@ function UserProfileSection() {
   };
 
   return (
-    <Section className="flex gap-16 p-8 mt-16">
+    <Section className="flex gap-16 p-8 mt-16 max-lg:flex-col max-lg:items-center">
       {isImageAvailable && <UserAvatar />}
       {!isImageAvailable && <DefaultAvatar />}
       <article className="flex-col text-elements-color-main w-full">
-        <UserFormLine className="mb-12">
+        <UserFormLine className="mb-12 max-lg:flex max-lg:justify-between max-lg:items-center max-md:flex-col">
           <div>
             <h2 className="uppercase text-xl font-bold">Profile</h2>
-            <p className="text-gray-500">
+            <p className="text-gray-500 max-lg:hidden">
               Update your photo and personal details
             </p>
           </div>

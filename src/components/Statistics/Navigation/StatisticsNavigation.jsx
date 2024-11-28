@@ -21,9 +21,9 @@ function StatisticsNavigation() {
   }, []);
 
   return (
-    <Section className="flex justify-between items-center pl-8 pr-8 pt-2 pb-2 mt-16 mb-8">
+    <Section className="flex justify-between items-center pl-8 pr-8 pt-2 pb-2 mt-16 mb-8 max-md:flex-col max-md:gap-4">
       <nav>
-        <ul className="flex justify-between items-center gap-8">
+        <ul className="flex justify-between items-center gap-8 max-lg:gap-4">
           <TypeItem title="week" path="/dashboard/week" />
           <TypeItem title="month" path="/dashboard/month" />
           <TypeItem title="year" path="/dashboard/year" />

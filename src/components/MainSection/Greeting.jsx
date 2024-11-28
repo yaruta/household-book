@@ -7,12 +7,12 @@ function Greeting() {
   const { isImageAvailable, userName } = useSelector((state) => state.user);
 
   return (
-    <div className="w-30 flex justify-start items-center gap-6">
+    <div className="w-30 flex justify-start items-center gap-6 max-sm:flex-col max-sm:justify-center max-sm:w-full">
       {isImageAvailable && <UserAvatar size="middle" />}
       {!isImageAvailable && <DefaultAvatar size="middle" />}
       <div className="text-elements-color-main">
-        <h2 className="text-2xl">Welcome back</h2>
-        <h1 className="text-4xl capitalize">{`${userName.firstName} ${userName.lastName}`}</h1>
+        <h2 className="text-2xl max-md:hidden">Welcome </h2>
+        <h1 className="text-4xl capitalize max-md:text-3xl">{`${userName.firstName} ${userName.lastName}`}</h1>
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ function TablesNavigation() {
   }, []);
 
   return (
-    <Section className="flex justify-between items-center pl-8 pr-8 pt-2 pb-2 mt-16">
+    <Section className="flex justify-between items-center pl-8 pr-8 pt-2 pb-2 mt-16 max-lg:flex-col max-lg:items-center max-lg:gap-4">
       <MonthsNavigation />
       <YearsNavigation />
     </Section>

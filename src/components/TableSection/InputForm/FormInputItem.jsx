@@ -31,18 +31,18 @@ function FormInputItem(props) {
   }
 
   return (
-    <div className="flex-col">
+    <div className="flex-col w-full">
       <label
         htmlFor={id}
-        className={`flex justify-center items-center text-elements-color-main border-[1px] border-border-color ${labelClasses}`}
+        className={`flex w-full justify-center items-center text-elements-color-main border-[1px] border-border-color ${labelClasses}`}
       >
-        <span className={`w-36 p-2 ${spanClasses}`}>{label}</span>
+        <span className={`max-w-36 grow p-2 ${spanClasses}`}>{label}</span>
         <input
           id={id}
           type={type}
           {...inputProps}
           onBlur={handleBlur}
-          className={`bg-sections-bg-2 outline-none p-2 text-elements-color-main placeholder-gray-400 grow ${
+          className={`bg-sections-bg-2 outline-none p-2 text-elements-color-main placeholder-gray-400 grow  ${
             isError && isError ? "border-[1px] border-red-500" : ""
           } ${inputClasses}`}
         />

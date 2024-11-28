@@ -71,7 +71,7 @@ function NewItemForm() {
 
   return (
     <Modal open onClose={handleClose}>
-      <h2 className="w-40 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-red-500 text-2xl uppercase">
+      <h2 className="w-full text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-red-500 text-2xl uppercase">
         New item
       </h2>
       {isMutationError && <p>{error}</p>}
