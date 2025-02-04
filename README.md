@@ -20,7 +20,7 @@ The **Household Book App** is a web application designed to help users manage th
 
 ## 📂 Project Structure
 ```
-📦 household-book-app
+📦 household-book
  ┣ 📂 src
  ┃ ┣ 📂 components    # Reusable UI components
  ┃ ┣ 📂 pages         # Application pages
@@ -36,8 +36,8 @@ The **Household Book App** is a web application designed to help users manage th
 ## 🚀 Getting Started
 ### 1️⃣ Clone the Repository
 ```sh
-git clone https://github.com/yourusername/household-book-app.git
-cd household-book-app
+git clone https://github.com/yaruta/household-book.git
+cd household-book
 ```
 ### 2️⃣ Install Dependencies
 ```sh
@@ -46,9 +46,9 @@ npm install
 ### 3️⃣ Configure Environment Variables
 Create a `.env` file in the root directory and add your Firebase data:
 ```sh
-VITE_FIREBASE_API_KEY=dein_api_key
-VITE_FIREBASE_AUTH_DOMAIN=dein_auth_domain
-VITE_FIREBASE_PROJECT_ID=dein_project_id
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
 ```
 
 ### 4️⃣ Start the Development Server
