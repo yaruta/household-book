@@ -1,3 +1,10 @@
+/**
+ * AvatarIcon component.
+ * This component renders a user avatar icon as an SVG inside a div container.
+ * @param {Object} props - The component props.
+ * @param {number} props.size - The size of the avatar in pixels.
+ * @returns {JSX.Element} The avatar icon component.
+*/
 function AvatarIcon({ size }) {
   return (
     <div

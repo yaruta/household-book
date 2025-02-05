@@ -1,3 +1,8 @@
+/**
+ * Logo component.
+ * This component renders the application logo with a stylized text design.
+ * @returns {JSX.Element} The logo component.
+*/
 function Logo() {
   return (
       <div className="uppercase">

@@ -1,7 +1,13 @@
+/**
+ * UserProfileSection component.
+ * This component displays and allows the user to edit their profile information,
+ * including first name, last name, and profile picture.
+ * @returns {JSX.Element} The user profile section component.
+ */
+
 import { useAuth } from "../../store/authContext";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-
 import Button from "../UI/Button";
 import Section from "../UI/Section";
 import UserFormInput from "./UserFormInput";
@@ -45,10 +51,17 @@ function UserProfileSection() {
 
   const { isImageAvailable } = useSelector((state) => state.user);
 
+  /**
+   * Enables editing mode.
+   */
   const handleStartEdit = () => {
     setIsEdit(true);
   };
 
+  /**
+   * Handles profile data submission.
+   * Validates input and updates user data.
+   */
   const handleEdit = () => {
     if (userData.firstName.trim() === "" || userData.lastName.trim() === "") {
       setInputError(true);
@@ -58,6 +71,11 @@ function UserProfileSection() {
     setIsEdit(false);
   };
 
+  /**
+   * Handles input field changes.
+   * Updates state with new values.
+   * @param {Object} event - The input change event.
+   */
   const handleChange = (event) => {
     setUserData((prevState) => {
       return { ...prevState, [event.target.name]: event.target.value };

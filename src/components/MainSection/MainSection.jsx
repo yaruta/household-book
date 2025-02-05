@@ -1,3 +1,11 @@
+/**
+ * MainSection component.
+ * This component serves as the main content section of the homepage.
+ * It displays a greeting, balance overview, and an illustration.
+ * It also fetches and updates financial data when available.
+ * @returns {JSX.Element} The main section component.
+ */
+
 import mainPageImage from "../../assets/image-for-main-page.png";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTables } from "../../util/http";
@@ -12,6 +20,7 @@ function MainSection() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.user.userId);
 
+  // Fetches financial data using React Query
   const { data } = useQuery({
     queryKey: ["tables"],
     queryFn: ({ signal }) => fetchTables({ userId, signal }),
@@ -20,7 +29,9 @@ function MainSection() {
 
   useEffect(() => {
     if (data) {
+      // Resets balance before recalculating
       dispatch(balanceActions.clearBalance());
+      // Updates balance state
       dispatch(balanceActions.calculateBalance(Object.values(data)));
     }
   }, [data]);

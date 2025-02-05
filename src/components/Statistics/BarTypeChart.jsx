@@ -1,3 +1,13 @@
+/**
+ * BarTypeChart component.
+ * This component renders a bar chart using the Recharts library.
+ * It dynamically maps data keys to different colors and visualizes revenue and expenses.
+ * @param {Object} props - The component props.
+ * @param {Array} props.data - The dataset for the chart.
+ * @param {Array} props.dataKeys - The keys representing different data categories (e.g., revenue, expenses).
+ * @returns {JSX.Element} The bar chart component.
+*/
+
 import {
   ResponsiveContainer,
   XAxis,

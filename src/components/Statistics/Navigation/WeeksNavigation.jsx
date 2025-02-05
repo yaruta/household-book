@@ -1,3 +1,9 @@
+/**
+ * WeeksNavigation component.
+ * This component allows users to navigate between weeks. It initializes the current
+ * week number and updates the Redux store when the user selects a different week.
+ * @returns {JSX.Element} The weeks navigation component.
+ */
 import { useDispatch, useSelector } from "react-redux";
 import { dateActions } from "../../../store/date-slice";
 import { getWeekNumber } from "../../../util/date";
@@ -9,12 +15,18 @@ function WeeksNavigation() {
 
   useEffect(() => {
     const currentWeek = getWeekNumber(new Date());
-    dispatch(dateActions.setSelectedWeek(currentWeek));
+    dispatch(dateActions.setSelectedWeek(currentWeek)); // Set the initial week number in Redux store
   }, []);
 
+  /**
+   * Decreases the selected week by one.
+   */
   const handlePreviousWeek = () => {
     dispatch(dateActions.setSelectedWeek(selectedWeek - 1));
   };
+  /**
+   * Increases the selected week by one.
+   */
   const handleNextWeek = () => {
     dispatch(dateActions.setSelectedWeek(selectedWeek + 1));
   };

@@ -1,9 +1,24 @@
+/**
+ * FormInput component.
+ * This component renders an input field with a label and an optional error message.
+ * It tracks whether the input has been blurred to determine when to display validation errors.
+ * @param {Object} props - The component props.
+ * @param {string} props.label - The label text for the input field.
+ * @param {string} props.id - The unique identifier for the input field.
+ * @param {boolean} props.isError - Indicates whether the input has a validation error.
+ * @param {string} props.errorMessage - The error message to display if validation fails.
+ * @returns {JSX.Element} The form input component.
+*/
+
 import { useState } from "react";
 
 function FormInput(props) {
   const { label, id, isError, errorMessage, ...inputProps } = props;
   const [blured, setBlured] = useState(false);
 
+  /**
+   * Handles the blur event by marking the input as blurred.
+   */
   function handleBlur() {
     setBlured(true);
   }

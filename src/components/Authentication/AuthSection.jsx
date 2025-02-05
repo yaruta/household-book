@@ -1,3 +1,11 @@
+/**
+ * AuthSection component.
+ * This section handles user authentication by displaying a login or sign-up form
+ * based on the current URL query parameters. It also provides navigation links
+ * between login and sign-up modes.
+ * @returns {JSX.Element} The authentication section component.
+*/
+
 import AuthForm from "./AuthForm";
 import { useSearchParams } from "react-router-dom";
 import { Link } from "react-router-dom";

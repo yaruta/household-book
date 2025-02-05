@@ -1,3 +1,10 @@
+/**
+ * MonthlyTable component.
+ * This component fetches and displays a monthly financial table for the selected user.
+ * It uses React Query to retrieve data asynchronously and updates the balance state.
+ * @returns {JSX.Element} The monthly table component.
+ */
+
 import { fetchTable } from "../../util/http";
 import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
@@ -12,12 +19,18 @@ function MonthlyTable() {
   const selectedDate = `${year}${month}`;
   const dispatch = useDispatch();
 
+  /**
+   * Fetches table data using React Query.
+   */
   const { data, isPending, isError, error } = useQuery({
     queryKey: ["tables", selectedDate],
     queryFn: ({ signal }) => fetchTable({ userId, signal, selectedDate }),
     staleTime: 5000,
   });
 
+  /**
+   * Updates the balance state whenever new data is received.
+   */
   useEffect(() => {
     if (data && !isError) {
       dispatch(balanceActions.clearBalance());

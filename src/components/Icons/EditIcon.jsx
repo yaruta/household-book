@@ -1,3 +1,8 @@
+/**
+ * EditIcon component.
+ * This component renders an edit icon as an SVG.
+ * @returns {JSX.Element} The edit icon component.
+ */
 function EditIcon() {
   return (
     <svg

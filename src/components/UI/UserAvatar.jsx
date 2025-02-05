@@ -1,3 +1,14 @@
+/**
+ * UserAvatar component.
+ * This component displays the user's avatar. If a user image is available,
+ * it is shown inside a styled container. Otherwise, a placeholder with a gradient
+ * background is displayed. The component also listens to loading states and applies
+ * a loading animation when necessary.
+ * @param {Object} props - The component props.
+ * @param {string} [props.size="big"] - The size of the avatar (small, middle, or big).
+ * @returns {JSX.Element} The user avatar component.
+ */
+
 import { useSelector } from "react-redux";
 import {useLoadUserPhoto} from "../../hooks/load-user-photo";
 

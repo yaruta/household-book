@@ -1,8 +1,13 @@
+/**
+ * NewItemForm component.
+ * This component renders a form for adding or editing an item. It includes validation,
+ * state management, and handles form submission using React Query for asynchronous requests.
+ * @returns {JSX.Element} The new item form component.
+*/
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../../store/ui-slice";
 import { isValidItemInput } from "../../../util/validating";
-
 import Modal from "../../UI/Modal";
 import FormLine from "./FormLine";
 import Button from "../../UI/Button";
@@ -32,11 +37,18 @@ function NewItemForm() {
   });
   const userId = useSelector((state) => state.user.userId);
 
+  /**
+   * Closes the form modal and resets temporary state.
+   */
   function handleClose() {
     dispatch(itemActions.removeTemporaryItem());
     dispatch(uiActions.toggleForm());
   }
 
+  /**
+   * Handles input changes and validates the input values.
+   * @param {Object} event - The input change event.
+   */
   function handleChange(event) {
     const value = event.target.value;
     const name = event.target.name;
@@ -53,6 +65,10 @@ function NewItemForm() {
     }
   }
 
+  /**
+   * Handles form submission and either creates or updates an item.
+   * @param {Object} event - The form submission event.
+   */
   function handleAddItem(event) {
     event.preventDefault();
     const id = `${event.target.date.value.replaceAll("-", "")}${Math.floor(

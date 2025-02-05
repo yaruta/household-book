@@ -1,3 +1,10 @@
+/**
+ * Balance component.
+ * This component displays the balance, income, and expenses.
+ * It adapts its styling based on the current route.
+ * @returns {JSX.Element} The balance component.
+ */
+
 import { useSelector } from "react-redux";
 import BalanceItem from "./BalanceItem";
 import { useLocation } from "react-router-dom";

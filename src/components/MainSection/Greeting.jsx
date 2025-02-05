@@ -1,5 +1,11 @@
-import { useSelector } from "react-redux";
+/**
+ * Greeting component.
+ * This component displays a welcome message with the user's name and avatar.
+ * It dynamically renders either the user's uploaded avatar or a default one.
+ * @returns {JSX.Element} The greeting component.
+ */
 
+import { useSelector } from "react-redux";
 import UserAvatar from "../UI/UserAvatar";
 import DefaultAvatar from "../UI/DefaultAvatar";
 

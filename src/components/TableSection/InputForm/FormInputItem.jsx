@@ -1,3 +1,16 @@
+/**
+ * FormInputItem component.
+ * This component renders a form input field with different styles depending on the input type.
+ * It includes error handling, dynamic label styling, and supports radio buttons and text inputs.
+ * @param {Object} props - The component props.
+ * @param {string} props.label - The label text for the input field.
+ * @param {string} props.id - The unique identifier for the input.
+ * @param {string} props.type - The type of input (text, radio, etc.).
+ * @param {boolean} props.isError - Indicates if there is a validation error.
+ * @param {string} props.errorMessage - The error message to display if validation fails.
+ * @returns {JSX.Element} The form input item component.
+ */
+
 import { useState } from "react";
 
 function FormInputItem(props) {
@@ -26,6 +39,9 @@ function FormInputItem(props) {
     labelClasses = "rounded-tr-full rounded-br-full";
   }
 
+  /**
+   * Handles the blur event and triggers validation display.
+   */
   function handleBlur() {
     setBlured(true);
   }

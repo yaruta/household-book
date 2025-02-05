@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/**
+ * Default initial state of the year.
+ */
 const yearDefaultValue = [
   { name: "Jan", revenue: 0, expenses: 0, balance: 0 },
   { name: "Feb", revenue: 0, expenses: 0, balance: 0 },
@@ -15,8 +18,11 @@ const yearDefaultValue = [
   { name: "Dec", revenue: 0, expenses: 0, balance: 0 },
 ];
 
+/**
+ * Default initial state of the month.
+ */
 const monthDefaultValue = [];
-for (let i = 0; i < 30; i++) {
+for (let i = 0; i < 31; i++) {
   monthDefaultValue.push({
     name: i + 1,
     expenses: 0,
@@ -25,6 +31,9 @@ for (let i = 0; i < 30; i++) {
   });
 }
 
+/**
+ * Default initial state of the week.
+ */
 const weekDefaultValue = [
   { name: "Mon", revenue: 0, expenses: 0, balance: 0 },
   { name: "Tue", revenue: 0, expenses: 0, balance: 0 },
@@ -35,15 +44,26 @@ const weekDefaultValue = [
   { name: "Sun", revenue: 0, expenses: 0, balance: 0 },
 ];
 
+/**
+ * Default initial state for the statistics slice.
+ */
 const defaultValue = {
   type: "year",
   value: yearDefaultValue,
 };
 
+/**
+ * Redux slice for managing statistical data.
+ */
 const statisticsSlice = createSlice({
   name: "statistics",
   initialState: defaultValue,
   reducers: {
+  /**
+   * Sets the statistics type (year, month, or week) and updates the state accordingly.
+   * @param {Object} state - The current state.
+   * @param {Object} action - The action containing the selected type.
+*/
     setStatisticsType(state, action) {
       const type = action.payload.type;
       state.type = type;
@@ -55,12 +75,17 @@ const statisticsSlice = createSlice({
         state.value = weekDefaultValue;
       }
     },
+    /**
+     * Updates the balance, revenue, and expenses based on the selected type and date.
+     * @param {Object} state - The current state.
+     * @param {Object} action - The action containing transaction data.
+     */
     setBalance(state, action) {
       let index;
       if (state.type === "year") {
-        index = parseInt(action.payload.date.substring(4, 6)) - 1;
+        index = parseInt(action.payload.date.substring(4, 6), 10) - 1;
       } else if (state.type === "month") {
-        index = parseInt(action.payload.item.date.substring(8, 10));
+        index = parseInt(action.payload.item.date.substring(8, 10), 10);
       } else if (state.type === "week") {
         index = parseInt(action.payload.weekDay);
       }
@@ -75,6 +100,10 @@ const statisticsSlice = createSlice({
         selectedElement.balance += amount;
       }
     },
+    /**
+     * Resets the balance, revenue, and expenses to their default values.
+     * @param {Object} state - The current state.
+     */
     clearBalance(state) {
       if (state.type === "month") {
         state.value = monthDefaultValue;

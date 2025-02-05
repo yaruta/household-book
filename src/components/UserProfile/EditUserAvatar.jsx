@@ -1,3 +1,10 @@
+/**
+ * EditUserAvatar component.
+ * This component allows users to upload, update, or delete their profile photo.
+ * It interacts with Firebase Storage for file management and updates the Redux store accordingly.
+ * @returns {JSX.Element} The user avatar editing component.
+ */
+
 import { deleteObject, uploadBytes } from "firebase/storage";
 import { storage } from "../../firebase/firebase";
 import { ref } from "firebase/storage";
@@ -14,10 +21,18 @@ function EditUserAvatar() {
   const [imageFileUpload, setImageFileUpload] = useState(null);
   const userId = useSelector((state) => state.user.userId);
 
+  /**
+   * Handles file selection when the user picks an image.
+   * @param {Event} event - The file input change event.
+   */
   const handleImagePick = (event) => {
     setImageFileUpload(event.target.files[0]);
   };
 
+  /**
+   * Uploads the selected image to Firebase Storage and updates the Redux store.
+   * @param {Event} event - The form submission event.
+   */
   const handleAddPhoto = async (event) => {
     event.preventDefault();
 
@@ -40,6 +55,9 @@ function EditUserAvatar() {
     });;
   };
 
+  /**
+   * Deletes the user's profile image from Firebase Storage and updates the Redux store.
+   */
   const handleDeletePhoto = async () => {
     const imageRef = ref(storage, `images/${userId}/profileImage`);
 

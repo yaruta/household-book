@@ -1,3 +1,8 @@
+/**
+ * RemoveIcon component.
+ * This component renders a bin icon as an SVG.
+ * @returns {JSX.Element} The bin icon component.
+ */
 function RemoveIcon() {
   return (
     <svg

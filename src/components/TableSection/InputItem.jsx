@@ -1,3 +1,17 @@
+/**
+ * InputItem component.
+ * This component renders an individual financial entry (income or expense) with options to edit or remove it.
+ * It uses React Query for asynchronous deletion and updates the Redux store when an item is edited.
+ * @param {Object} props - The component props.
+ * @param {string} props.id - The unique identifier of the item.
+ * @param {string} props.date - The date associated with the item.
+ * @param {string} props.title - The title or description of the item.
+ * @param {string} props.type - The type of the item ('expenses' or 'revenue').
+ * @param {number} props.amount - The monetary value of the item.
+ * @param {string} props.userId - The user identifier associated with the item.
+ * @returns {JSX.Element} The input item component.
+*/
+
 import { removeItem, queryClient } from "../../util/http";
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch } from "react-redux";
@@ -9,6 +23,9 @@ import { itemActions } from "../../store/item-slice";
 function InputItem({ id, date, title, type, amount, userId }) {
   const dispatch = useDispatch();
   const selectedDate = date.substring(0, 7).replace("-", "");
+  /**
+   * Mutation for removing an item using React Query.
+   */
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: removeItem,
     onSuccess: () => {
@@ -16,10 +33,16 @@ function InputItem({ id, date, title, type, amount, userId }) {
     },
   });
 
+  /**
+   * Handles item deletion by triggering the remove mutation.
+   */
   const handleDelete = () => {
     mutate({ userId, id });
   };
 
+  /**
+   * Handles item editing by storing it in the Redux store and opening the edit form.
+   */
   function handleStartEdit() {
     dispatch(itemActions.setTemporaryItem({ id, date, title, type, amount }));
     dispatch(uiActions.toggleForm());

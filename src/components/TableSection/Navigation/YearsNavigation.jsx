@@ -1,3 +1,10 @@
+/**
+ * YearsNavigation component.
+ * This component renders a dropdown for selecting a year. It initializes the selected
+ * year in the Redux store upon mounting and updates the state when a new year is selected.
+ * @returns {JSX.Element} The years navigation component.
+ */
+
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { dateActions } from "../../../store/date-slice";
@@ -10,6 +17,10 @@ function YearsNavigation() {
     dispatch(dateActions.setSelectedYear(currentYear));
   }, []);
 
+  /**
+   * Handles the selection of a different year and updates the Redux store.
+   * @param {Object} event - The event object from the select input.
+   */
   const handleSelectYear = (event) => {
     dispatch(dateActions.setSelectedYear(event.target.value));
   };

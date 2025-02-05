@@ -1,7 +1,13 @@
+/**
+ * StatisticsNavigation component.
+ * This component provides navigation for different statistical views (week, month, year).
+ * It initializes the statistics type to "year" and updates the URL accordingly.
+ * @returns {JSX.Element} The statistics navigation component.
+ */
+
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import Section from "../../UI/Section";
 import TypeItem from "./TypeItem";
 import YearsNavigation from "../../TableSection/Navigation/YearsNavigation";
@@ -16,8 +22,8 @@ function StatisticsNavigation() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(statisticsActions.setStatisticsType({ type: "year" }));
-    navigate("/dashboard/year");
+    dispatch(statisticsActions.setStatisticsType({ type: "year" })); // Set default statistics type to "year"
+    navigate("/dashboard/year"); // Redirect to the year view
   }, []);
 
   return (

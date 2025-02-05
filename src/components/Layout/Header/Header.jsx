@@ -1,3 +1,10 @@
+/**
+ * Header component.
+ * This component renders the application's header, displaying the user's name, email,
+ * and avatar if logged in. It also includes a button to toggle the sidebar.
+ * @returns {JSX.Element} The header component.
+ */
+
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../../store/ui-slice";
 import { useQuery } from "@tanstack/react-query";
@@ -16,6 +23,7 @@ function Header() {
     (state) => state.user
   );
 
+  // Fetch user information using React Query
   const { data, isError } = useQuery({
     queryKey: ["userName", { userId }],
     queryFn: ({ signal }) => getUserInfo({ signal, userId }),
@@ -28,7 +36,9 @@ function Header() {
     }
   }, [data]);
 
-  
+  /**
+   * Toggles the visibility of the sidebar.
+   */
   function handleToggleSidebar() {
     dispatch(uiActions.toggleSidebar());
   }

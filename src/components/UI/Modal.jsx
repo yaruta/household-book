@@ -1,13 +1,25 @@
+/**
+ * Modal component.
+ * This component renders a modal dialog using the HTML <dialog> element.
+ * It utilizes React Portals to render outside the main component tree.
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The content inside the modal.
+ * @param {boolean} props.open - Determines whether the modal should be displayed.
+ * @param {Function} props.onClose - Callback function triggered when the modal is closed.
+ * @returns {JSX.Element} The modal component.
+ */
+
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 function Modal({ children, open, onClose }) {
-  const dialog = useRef();
+  const dialog = useRef(); // create a ref to reference the <dialog> element
 
   useEffect(() => {
     const modal = dialog.current;
 
     if (open) {
+      // show the modal when 'open' is true
       modal.showModal();
     }
 
@@ -15,6 +27,7 @@ function Modal({ children, open, onClose }) {
   }, []);
 
   return createPortal(
+    // Render the modal into the 'modal-root' container outside the main component tree
     <dialog
       ref={dialog}
       onClose={onClose}

@@ -1,6 +1,12 @@
+/**
+ * RootTables component.
+ * This component serves as the root layout for the tables section,
+ * including the tables navigation and rendering nested routes via Outlet.
+ * @returns {JSX.Element} The root tables layout component.
+*/
+
 import { Outlet } from "react-router-dom";
 import TablesNavigation from "../components/TableSection/Navigation/TablesNavigation";
-import Section from "../components/UI/Section";
 
 function RootTables() {
   return (

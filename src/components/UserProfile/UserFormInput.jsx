@@ -1,3 +1,15 @@
+/**
+ * UserFormInput component.
+ * This component renders a labeled input field for user information.
+ * If isEdit is true, it displays an editable text input; otherwise, it shows static text.
+ * @param {Object} props - The component props.
+ * @param {string} props.label - The label for the input field.
+ * @param {string} props.id - The ID and name of the input field.
+ * @param {boolean} props.isEdit - Determines if the input should be editable.
+ * @param {string} props.value - The current value to display or edit.
+ * @returns {JSX.Element} The user form input component.
+ */
+
 import UserFormLine from "./UserFormLine";
 
 function UserFormInput({ label, id, isEdit, value, ...props }) {

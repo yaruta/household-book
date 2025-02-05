@@ -1,3 +1,11 @@
+/**
+ * TableSection component.
+ * This component renders the table section, including balance display,
+ * a button to add new items, and a monthly table of financial entries.
+ * It manages UI state for showing or hiding the new item form.
+ * @returns {JSX.Element} The table section component.
+ */
+
 import { useDispatch, useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import Section from "../UI/Section";
@@ -10,6 +18,9 @@ function TableSection() {
   const dispatch = useDispatch();
   const { formIsVisible } = useSelector((state) => state.ui);
 
+  /**
+   * Toggles the visibility of the new item form.
+   */
   function handleToggleForm() {
     dispatch(uiActions.toggleForm());
   }

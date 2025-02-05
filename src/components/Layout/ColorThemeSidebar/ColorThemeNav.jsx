@@ -1,3 +1,10 @@
+/**
+ * ColorThemeNav component.
+ * This component provides a navigation menu for selecting the application's color theme.
+ * It displays theme options and updates the selected theme in the Redux store when clicked.
+ * @returns {JSX.Element} The color theme navigation component.
+*/
+
 import { useSelector, useDispatch } from "react-redux";
 import { uiActions } from "../../../store/ui-slice";
 import ColorThemeItem from "./ColorThemeItem";
@@ -7,6 +14,10 @@ function ColorThemeNav() {
 
   const dispatch = useDispatch();
 
+  /**
+   * Handles theme selection and updates the Redux store if the selected theme changes.
+   * @param {string} theme - The chosen theme ('dark' or 'light').
+   */
   function handleThemeClick(theme) {
     if (selectedTheme !== theme) {
       dispatch(uiActions.setTheme(theme));

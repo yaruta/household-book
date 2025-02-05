@@ -1,3 +1,10 @@
+/**
+ * MainNavigation component.
+ * This component renders the main navigation menu, displaying links to various sections
+ * of the application when the user is logged in. It also includes a logout button.
+ * @returns {JSX.Element} The main navigation component.
+ */
+
 import { useNavigate } from "react-router-dom";
 import NavItem from "./NavItem";
 import HomeIcon from "../../Icons/HomeIcon";
@@ -15,6 +22,10 @@ function MainNavigation() {
   const dispatch = useDispatch();
   const { userLoggedIn } = useAuth();
 
+  /**
+   * Handles user logout by signing out, removing the user ID from Redux state,
+   * and navigating back to the login page.
+   */
   function handleLogout() {
     doSignOut();
     dispatch(userActions.removeUserId());

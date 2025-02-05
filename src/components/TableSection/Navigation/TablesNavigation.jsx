@@ -1,3 +1,11 @@
+/**
+ * TablesNavigation component.
+ * This component renders the navigation for the tables section, allowing users to
+ * select a specific month and year. It automatically navigates to the current month
+ * upon mounting.
+ * @returns {JSX.Element} The tables navigation component.
+ */
+
 import { useEffect } from "react";
 import Section from "../../UI/Section";
 import MonthsNavigation from "./MonthsNavigation";

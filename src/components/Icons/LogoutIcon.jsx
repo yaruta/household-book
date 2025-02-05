@@ -1,3 +1,8 @@
+/**
+ * LogoutIcon component.
+ * This component renders a logout icon as an SVG.
+ * @returns {JSX.Element} The logout icon component.
+ */
 export default function LogoutIcon() {
   return (
     <svg

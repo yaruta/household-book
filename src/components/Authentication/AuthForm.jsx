@@ -1,3 +1,12 @@
+/**
+ * AuthForm component.
+ * This component handles user authentication (login and sign-up) using Firebase.
+ * It validates user input, manages authentication state, and dispatches user data to the Redux store.
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isLogin - Determines whether the form is for login or sign-up.
+ * @returns {JSX.Element} The authentication form component.
+*/
+
 import {
   doCreateUserWithEmailAndPassword,
   doSignInWithEmailAndPassword,
@@ -13,11 +22,11 @@ import Button from "../UI/Button";
 import FormInput from "./FormInput";
 
 function AuthForm({ isLogin }) {
-  //isSubmitting and errorMessage states to control the process of authentication with firebase functions
+  //States to control the process of authentication with firebase functions
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  //formValues and isError states for the form inputs check and submitting
+  //States for form values and validation errors
   const [formValues, setFormValues] = useState({
     email: "",
     password: "",
@@ -30,12 +39,15 @@ function AuthForm({ isLogin }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  // useMutation-hook for creating a user data in firebase after successful registration
+  // Mutation hook for creating user data in Firebase after successful registration
   const { mutate, isError: isMutationError } = useMutation({
     mutationFn: createUserData,
   });
 
-  // function for onChange event on the input fields to get the value and validate the data.
+  /**
+   * Handles input changes, validates the input, and updates the state.
+   * @param {Object} event - The event object.
+   */
   function handleChange(event) {
     const value = event.target.value;
     const name = event.target.name;
@@ -58,7 +70,10 @@ function AuthForm({ isLogin }) {
     }
   }
 
-  // function for handling submit event on the AuthForm
+  /**
+   * Handles form submission for login or sign-up.
+   * @param {Object} event - The event object.
+   */
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -66,8 +81,8 @@ function AuthForm({ isLogin }) {
       setIsSubmitting(true);
 
       try {
-        //checking, if the mode in the path is 'login', then do login
         if (isLogin) {
+          // Login existing user
           await doSignInWithEmailAndPassword(
             formValues.email,
             formValues.password
@@ -75,13 +90,13 @@ function AuthForm({ isLogin }) {
           const id = await getUserId({ email: formValues.email });
           dispatch(userActions.setUserId(id));
         }
-        // otherwise sign up
         else if (!isLogin) {
+          // Register new user
           await doCreateUserWithEmailAndPassword(
             formValues.email,
             formValues.password
           );
-          //creating id for the user
+          // Create user id
           const id = Math.floor(Math.random() * 1000000);
           mutate({ email: formValues.email, id: id });
           dispatch(userActions.setUserId(id));
@@ -90,6 +105,7 @@ function AuthForm({ isLogin }) {
         setIsSubmitting(false);
         navigate("/");
       } catch (err) {
+        // Handle authentication errors
         if (err.code === "auth/invalid-credential") {
           setErrorMessage(
             "The E-Mail and password for the login do not match."

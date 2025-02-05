@@ -1,7 +1,14 @@
+/**
+ * StatisticsSection component.
+ * This component fetches financial data and calculates statistics based on the selected
+ * time period (year, month, or week). It renders both an area chart and a bar chart
+ * to visualize the financial data.
+ * @returns {JSX.Element} The statistics section component.
+ */
+
 import { useQuery } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTables } from "../../util/http";
-
 import Section from "../UI/Section";
 import AreaTypeChart from "./AreaTypeChart";
 import BarTypeChart from "./BarTypeChart";
@@ -22,6 +29,9 @@ function StatisticsSection() {
     staleTime: 5000,
   });
 
+  /**
+   * Calculates balance for the selected year.
+   */
   const calculateBalanceForYear = () => {
     Object.values(data).map((month, index) => {
       const date = Object.keys(data)[index];
@@ -35,6 +45,9 @@ function StatisticsSection() {
     });
   };
 
+  /**
+   * Calculates balance for the selected month.
+   */
   const calculateBalanceForMonth = () => {
     Object.values(data).map((monthTable, index) => {
       const itemMonth = Object.keys(data)[index].substring(4, 6);
@@ -48,6 +61,9 @@ function StatisticsSection() {
     });
   };
 
+  /**
+   * Calculates balance for the selected week.
+   */
   const calculateBalanceForWeek = () => {
     Object.values(data).map((monthTable) => {
       Object.values(monthTable).map((item) => {

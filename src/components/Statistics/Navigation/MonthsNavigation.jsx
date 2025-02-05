@@ -1,3 +1,10 @@
+/**
+ * MonthsNavigation component.
+ * This component renders a dropdown for selecting a month.
+ * It initializes the selected month and year based on the current date and updates the Redux store.
+ * @returns {JSX.Element} The months navigation component.
+ */
+
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { dateActions } from "../../../store/date-slice";
@@ -9,10 +16,14 @@ function MonthsNavigation() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(dateActions.setSelectedYear(currentYear));
-    dispatch(dateActions.setSelectedMonth(currentMonth));
+    dispatch(dateActions.setSelectedYear(currentYear)); // Set initial year in Redux store
+    dispatch(dateActions.setSelectedMonth(currentMonth)); // Set initial month in Redux store
   }, []);
 
+  /**
+   * Handles the selection of a new month and updates the Redux store.
+   * @param {Object} event - The event object from the select input.
+   */
   const handleSelectMonth = (event) => {
     dispatch(dateActions.setSelectedMonth(event.target.value));
   };
