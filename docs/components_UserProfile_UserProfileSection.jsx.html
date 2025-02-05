@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/UserProfile/UserProfileSection.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/UserProfile/UserProfileSection.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * UserProfileSection component.
+ * This component displays and allows the user to edit their profile information,
+ * including first name, last name, and profile picture.
+ * @returns {JSX.Element} The user profile section component.
+ */
+
+import { useAuth } from "../../store/authContext";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import Button from "../UI/Button";
+import Section from "../UI/Section";
+import UserFormInput from "./UserFormInput";
+import UserFormLine from "./UserFormLine";
+import EditUserAvatar from "./EditUserAvatar";
+import UserAvatar from "../UI/UserAvatar";
+import DefaultAvatar from "../UI/DefaultAvatar";
+import { useMutation } from "@tanstack/react-query";
+import { addUserInfo, queryClient } from "../../util/http";
+
+function UserProfileSection() {
+  const { currentUser } = useAuth();
+  const { userId, userName } = useSelector((state) => state.user);
+  const [isEdit, setIsEdit] = useState(false);
+  const [userData, setUserData] = useState({
+    firstName: userName ? userName.firstName : "",
+    lastName: userName ? userName.lastName : "",
+  });
+  const [inputError, setInputError] = useState(false);
+
+  useEffect(() => {
+    if (userName) {
+      setUserData({
+        firstName: userName.firstName,
+        lastName: userName.lastName,
+      });
+    }
+  }, [userName]);
+
+  const {
+    mutate,
+    isPending,
+    isError: isMutationError,
+    error: mutationError,
+  } = useMutation({
+    mutationFn: addUserInfo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["userName"] });
+    },
+  });
+
+  const { isImageAvailable } = useSelector((state) => state.user);
+
+  /**
+   * Enables editing mode.
+   */
+  const handleStartEdit = () => {
+    setIsEdit(true);
+  };
+
+  /**
+   * Handles profile data submission.
+   * Validates input and updates user data.
+   */
+  const handleEdit = () => {
+    if (userData.firstName.trim() === "" || userData.lastName.trim() === "") {
+      setInputError(true);
+      return;
+    }
+    mutate({ userId, userData });
+    setIsEdit(false);
+  };
+
+  /**
+   * Handles input field changes.
+   * Updates state with new values.
+   * @param {Object} event - The input change event.
+   */
+  const handleChange = (event) => {
+    setUserData((prevState) => {
+      return { ...prevState, [event.target.name]: event.target.value };
+    });
+  };
+
+  return (
+    &lt;Section className="flex gap-16 p-8 mt-16 max-lg:flex-col max-lg:items-center">
+      {isImageAvailable &amp;&amp; &lt;UserAvatar />}
+      {!isImageAvailable &amp;&amp; &lt;DefaultAvatar />}
+      &lt;article className="flex-col text-elements-color-main w-full">
+        &lt;UserFormLine className="mb-12 max-lg:flex max-lg:justify-between max-lg:items-center max-md:flex-col">
+          &lt;div>
+            &lt;h2 className="uppercase text-xl font-bold">Profile&lt;/h2>
+            &lt;p className="text-gray-500 max-lg:hidden">
+              Update your photo and personal details
+            &lt;/p>
+          &lt;/div>
+          &lt;div>
+            &lt;Button
+              onClick={isEdit ? handleEdit : handleStartEdit}
+              disabled={isPending}
+            >
+              {isPending ? "Saving" : isEdit ? "Save" : "Edit"}
+            &lt;/Button>
+          &lt;/div>
+        &lt;/UserFormLine>
+        &lt;UserFormLine>
+          {isMutationError &amp;&amp; &lt;p className="text-gray-500">{mutationError}&lt;/p>}
+          {inputError &amp;&amp; (
+            &lt;p className="text-gray-500 text-xs">
+              First name or last name cannot be an empty string.
+            &lt;/p>
+          )}
+        &lt;/UserFormLine>
+        &lt;UserFormLine>
+          &lt;p className="min-w-20">Email:&lt;/p>
+          &lt;p className="text-pink-500">{currentUser.email}&lt;/p>
+        &lt;/UserFormLine>
+        &lt;UserFormInput
+          label="First Name:"
+          id="firstName"
+          isEdit={isEdit}
+          onChange={handleChange}
+          value={userName.firstName}
+        />
+        &lt;UserFormInput
+          label="Last Name:"
+          id="lastName"
+          isEdit={isEdit}
+          onChange={handleChange}
+          value={userName.lastName}
+        />
+        &lt;EditUserAvatar />
+      &lt;/article>
+    &lt;/Section>
+  );
+}
+
+export default UserProfileSection;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AvatarIcon">AvatarIcon</a></li><li><a href="global.html#BalanceItem">BalanceItem</a></li><li><a href="global.html#Button">Button</a></li><li><a href="global.html#ColorThemeItem">ColorThemeItem</a></li><li><a href="global.html#DashboardIcon">DashboardIcon</a></li><li><a href="global.html#EditIcon">EditIcon</a></li><li><a href="global.html#FormLine">FormLine</a></li><li><a href="global.html#HomeIcon">HomeIcon</a></li><li><a href="global.html#LinearGradient">LinearGradient</a></li><li><a href="global.html#Logo">Logo</a></li><li><a href="global.html#PhotoIcon">PhotoIcon</a></li><li><a href="global.html#RemoveIcon">RemoveIcon</a></li><li><a href="global.html#Section">Section</a></li><li><a href="global.html#TablesIcon">TablesIcon</a></li><li><a href="global.html#UserFormLine">UserFormLine</a></li><li><a href="global.html#addItem">addItem</a></li><li><a href="global.html#addUserInfo">addUserInfo</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#balanceSlice">balanceSlice</a></li><li><a href="global.html#createUserData">createUserData</a></li><li><a href="global.html#dateSlice">dateSlice</a></li><li><a href="global.html#defaultValue">defaultValue</a></li><li><a href="global.html#doCreateUserWithEmailAndPassword">doCreateUserWithEmailAndPassword</a></li><li><a href="global.html#doSignInWithEmailAndPassword">doSignInWithEmailAndPassword</a></li><li><a href="global.html#doSignOut">doSignOut</a></li><li><a href="global.html#fetchTable">fetchTable</a></li><li><a href="global.html#fetchTables">fetchTables</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#getUserId">getUserId</a></li><li><a href="global.html#getUserInfo">getUserInfo</a></li><li><a href="global.html#getWeekNumber">getWeekNumber</a></li><li><a href="global.html#isValidInput">isValidInput</a></li><li><a href="global.html#isValidItemInput">isValidItemInput</a></li><li><a href="global.html#itemSlice">itemSlice</a></li><li><a href="global.html#monthDefaultValue">monthDefaultValue</a></li><li><a href="global.html#queryClient">queryClient</a></li><li><a href="global.html#removeItem">removeItem</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#statisticsSlice">statisticsSlice</a></li><li><a href="global.html#storage">storage</a></li><li><a href="global.html#store">store</a></li><li><a href="global.html#uiSlice">uiSlice</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useLoadUserPhoto">useLoadUserPhoto</a></li><li><a href="global.html#userSlice">userSlice</a></li><li><a href="global.html#weekDefaultValue">weekDefaultValue</a></li><li><a href="global.html#yearDefaultValue">yearDefaultValue</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Feb 05 2025 15:03:28 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

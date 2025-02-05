@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/TableSection/Navigation/YearsNavigation.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/TableSection/Navigation/YearsNavigation.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * YearsNavigation component.
+ * This component renders a dropdown for selecting a year. It initializes the selected
+ * year in the Redux store upon mounting and updates the state when a new year is selected.
+ * @returns {JSX.Element} The years navigation component.
+ */
+
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { dateActions } from "../../../store/date-slice";
+
+function YearsNavigation() {
+  const currentYear = new Date().getFullYear();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(dateActions.setSelectedYear(currentYear));
+  }, []);
+
+  /**
+   * Handles the selection of a different year and updates the Redux store.
+   * @param {Object} event - The event object from the select input.
+   */
+  const handleSelectYear = (event) => {
+    dispatch(dateActions.setSelectedYear(event.target.value));
+  };
+
+  return (
+    &lt;select
+      name="year"
+      className="bg-sections-bg-1 text-elements-color-main p-1 pl-8 pr-8 rounded-full outline-none max-lg:bg-sections-bg-2"
+      onChange={handleSelectYear}
+      defaultValue={currentYear}
+    >
+      &lt;option value={currentYear + 1}>{currentYear + 1}&lt;/option>
+      &lt;option value={currentYear}>{currentYear}&lt;/option>
+      &lt;option value={currentYear - 1}>{currentYear - 1}&lt;/option>
+      &lt;option value={currentYear - 2}>{currentYear - 2}&lt;/option>
+    &lt;/select>
+  );
+}
+
+export default YearsNavigation;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AvatarIcon">AvatarIcon</a></li><li><a href="global.html#BalanceItem">BalanceItem</a></li><li><a href="global.html#Button">Button</a></li><li><a href="global.html#ColorThemeItem">ColorThemeItem</a></li><li><a href="global.html#DashboardIcon">DashboardIcon</a></li><li><a href="global.html#EditIcon">EditIcon</a></li><li><a href="global.html#FormLine">FormLine</a></li><li><a href="global.html#HomeIcon">HomeIcon</a></li><li><a href="global.html#LinearGradient">LinearGradient</a></li><li><a href="global.html#Logo">Logo</a></li><li><a href="global.html#PhotoIcon">PhotoIcon</a></li><li><a href="global.html#RemoveIcon">RemoveIcon</a></li><li><a href="global.html#Section">Section</a></li><li><a href="global.html#TablesIcon">TablesIcon</a></li><li><a href="global.html#UserFormLine">UserFormLine</a></li><li><a href="global.html#addItem">addItem</a></li><li><a href="global.html#addUserInfo">addUserInfo</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#balanceSlice">balanceSlice</a></li><li><a href="global.html#createUserData">createUserData</a></li><li><a href="global.html#dateSlice">dateSlice</a></li><li><a href="global.html#defaultValue">defaultValue</a></li><li><a href="global.html#doCreateUserWithEmailAndPassword">doCreateUserWithEmailAndPassword</a></li><li><a href="global.html#doSignInWithEmailAndPassword">doSignInWithEmailAndPassword</a></li><li><a href="global.html#doSignOut">doSignOut</a></li><li><a href="global.html#fetchTable">fetchTable</a></li><li><a href="global.html#fetchTables">fetchTables</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#getUserId">getUserId</a></li><li><a href="global.html#getUserInfo">getUserInfo</a></li><li><a href="global.html#getWeekNumber">getWeekNumber</a></li><li><a href="global.html#isValidInput">isValidInput</a></li><li><a href="global.html#isValidItemInput">isValidItemInput</a></li><li><a href="global.html#itemSlice">itemSlice</a></li><li><a href="global.html#monthDefaultValue">monthDefaultValue</a></li><li><a href="global.html#queryClient">queryClient</a></li><li><a href="global.html#removeItem">removeItem</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#statisticsSlice">statisticsSlice</a></li><li><a href="global.html#storage">storage</a></li><li><a href="global.html#store">store</a></li><li><a href="global.html#uiSlice">uiSlice</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useLoadUserPhoto">useLoadUserPhoto</a></li><li><a href="global.html#userSlice">userSlice</a></li><li><a href="global.html#weekDefaultValue">weekDefaultValue</a></li><li><a href="global.html#yearDefaultValue">yearDefaultValue</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Feb 05 2025 15:03:28 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/TableSection/InputForm/FormInputItem.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/TableSection/InputForm/FormInputItem.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * FormInputItem component.
+ * This component renders a form input field with different styles depending on the input type.
+ * It includes error handling, dynamic label styling, and supports radio buttons and text inputs.
+ * @param {Object} props - The component props.
+ * @param {string} props.label - The label text for the input field.
+ * @param {string} props.id - The unique identifier for the input.
+ * @param {string} props.type - The type of input (text, radio, etc.).
+ * @param {boolean} props.isError - Indicates if there is a validation error.
+ * @param {string} props.errorMessage - The error message to display if validation fails.
+ * @returns {JSX.Element} The form input item component.
+ */
+
+import { useState } from "react";
+
+function FormInputItem(props) {
+  const { label, id, type, isError, errorMessage, ...inputProps } = props;
+  const [blured, setBlured] = useState(false);
+
+  let inputClasses = "";
+  let labelClasses = "";
+  let spanClasses = "pl-8";
+
+  if (id === "title" || id === "amount") {
+    labelClasses = "rounded-tl-full rounded-bl-full";
+  } else if (type === "radio") {
+    inputClasses = "hidden";
+    if (id === "expenses") {
+      labelClasses =
+        "bg-gradient-to-b from-red-200 to-pink-200 has-[:checked]:from-red-500 has-[:checked]:to-pink-500 rounded-tr-full rounded-br-full";
+      spanClasses = "text-center";
+    } else if (id === "revenue") {
+      labelClasses =
+        "bg-gradient-to-b from-cyan-200 to-green-200 has-[:checked]:from-cyan-500 has-[:checked]:to-green-500";
+      spanClasses = "text-center";
+    }
+  } else if (id === "date") {
+    inputClasses = "rounded-tr-full rounded-br-full";
+    labelClasses = "rounded-tr-full rounded-br-full";
+  }
+
+  /**
+   * Handles the blur event and triggers validation display.
+   */
+  function handleBlur() {
+    setBlured(true);
+  }
+
+  return (
+    &lt;div className="flex-col w-full">
+      &lt;label
+        htmlFor={id}
+        className={`flex w-full justify-center items-center text-elements-color-main border-[1px] border-border-color ${labelClasses}`}
+      >
+        &lt;span className={`max-w-36 grow p-2 ${spanClasses}`}>{label}&lt;/span>
+        &lt;input
+          id={id}
+          type={type}
+          {...inputProps}
+          onBlur={handleBlur}
+          className={`bg-sections-bg-2 outline-none p-2 text-elements-color-main placeholder-gray-400 grow  ${
+            isError &amp;&amp; isError ? "border-[1px] border-red-500" : ""
+          } ${inputClasses}`}
+        />
+      &lt;/label>
+      &lt;div
+        className={
+          blured &amp;&amp; isError
+            ? "text-red-400 text-xs text-end pt-[3px]"
+            : "hidden"
+        }
+      >
+        {errorMessage}
+      &lt;/div>
+    &lt;/div>
+  );
+}
+
+export default FormInputItem;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AvatarIcon">AvatarIcon</a></li><li><a href="global.html#BalanceItem">BalanceItem</a></li><li><a href="global.html#Button">Button</a></li><li><a href="global.html#ColorThemeItem">ColorThemeItem</a></li><li><a href="global.html#DashboardIcon">DashboardIcon</a></li><li><a href="global.html#EditIcon">EditIcon</a></li><li><a href="global.html#FormLine">FormLine</a></li><li><a href="global.html#HomeIcon">HomeIcon</a></li><li><a href="global.html#LinearGradient">LinearGradient</a></li><li><a href="global.html#Logo">Logo</a></li><li><a href="global.html#PhotoIcon">PhotoIcon</a></li><li><a href="global.html#RemoveIcon">RemoveIcon</a></li><li><a href="global.html#Section">Section</a></li><li><a href="global.html#TablesIcon">TablesIcon</a></li><li><a href="global.html#UserFormLine">UserFormLine</a></li><li><a href="global.html#addItem">addItem</a></li><li><a href="global.html#addUserInfo">addUserInfo</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#balanceSlice">balanceSlice</a></li><li><a href="global.html#createUserData">createUserData</a></li><li><a href="global.html#dateSlice">dateSlice</a></li><li><a href="global.html#defaultValue">defaultValue</a></li><li><a href="global.html#doCreateUserWithEmailAndPassword">doCreateUserWithEmailAndPassword</a></li><li><a href="global.html#doSignInWithEmailAndPassword">doSignInWithEmailAndPassword</a></li><li><a href="global.html#doSignOut">doSignOut</a></li><li><a href="global.html#fetchTable">fetchTable</a></li><li><a href="global.html#fetchTables">fetchTables</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#getUserId">getUserId</a></li><li><a href="global.html#getUserInfo">getUserInfo</a></li><li><a href="global.html#getWeekNumber">getWeekNumber</a></li><li><a href="global.html#isValidInput">isValidInput</a></li><li><a href="global.html#isValidItemInput">isValidItemInput</a></li><li><a href="global.html#itemSlice">itemSlice</a></li><li><a href="global.html#monthDefaultValue">monthDefaultValue</a></li><li><a href="global.html#queryClient">queryClient</a></li><li><a href="global.html#removeItem">removeItem</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#statisticsSlice">statisticsSlice</a></li><li><a href="global.html#storage">storage</a></li><li><a href="global.html#store">store</a></li><li><a href="global.html#uiSlice">uiSlice</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useLoadUserPhoto">useLoadUserPhoto</a></li><li><a href="global.html#userSlice">userSlice</a></li><li><a href="global.html#weekDefaultValue">weekDefaultValue</a></li><li><a href="global.html#yearDefaultValue">yearDefaultValue</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Feb 05 2025 15:03:28 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

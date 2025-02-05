@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Layout/ColorThemeSidebar/ColorThemeNav.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Layout/ColorThemeSidebar/ColorThemeNav.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * ColorThemeNav component.
+ * This component provides a navigation menu for selecting the application's color theme.
+ * It displays theme options and updates the selected theme in the Redux store when clicked.
+ * @returns {JSX.Element} The color theme navigation component.
+*/
+
+import { useSelector, useDispatch } from "react-redux";
+import { uiActions } from "../../../store/ui-slice";
+import ColorThemeItem from "./ColorThemeItem";
+
+function ColorThemeNav() {
+  const selectedTheme = useSelector(state => state.ui.theme);
+
+  const dispatch = useDispatch();
+
+  /**
+   * Handles theme selection and updates the Redux store if the selected theme changes.
+   * @param {string} theme - The chosen theme ('dark' or 'light').
+   */
+  function handleThemeClick(theme) {
+    if (selectedTheme !== theme) {
+      dispatch(uiActions.setTheme(theme));
+    } 
+  }
+
+  return (
+    &lt;aside className="w-10 h-lvh p-2 flex-col bg-gradient-to-b from-sections-bg-2/10 to-sections-bg-1 sticky right-0 top-0">
+      &lt;nav className="pt-96 mt-64">
+        &lt;ul className="flex gap-8 rotate-[-90deg] text-white">
+          &lt;ColorThemeItem title="Dark" isActive={selectedTheme === "dark"} onChoise={handleThemeClick}/>
+          &lt;ColorThemeItem title="Light" isActive={selectedTheme === "light"} onChoise={handleThemeClick}/>
+        &lt;/ul>
+      &lt;/nav>
+    &lt;/aside>
+  );
+}
+
+export default ColorThemeNav;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AvatarIcon">AvatarIcon</a></li><li><a href="global.html#BalanceItem">BalanceItem</a></li><li><a href="global.html#Button">Button</a></li><li><a href="global.html#ColorThemeItem">ColorThemeItem</a></li><li><a href="global.html#DashboardIcon">DashboardIcon</a></li><li><a href="global.html#EditIcon">EditIcon</a></li><li><a href="global.html#FormLine">FormLine</a></li><li><a href="global.html#HomeIcon">HomeIcon</a></li><li><a href="global.html#LinearGradient">LinearGradient</a></li><li><a href="global.html#Logo">Logo</a></li><li><a href="global.html#PhotoIcon">PhotoIcon</a></li><li><a href="global.html#RemoveIcon">RemoveIcon</a></li><li><a href="global.html#Section">Section</a></li><li><a href="global.html#TablesIcon">TablesIcon</a></li><li><a href="global.html#UserFormLine">UserFormLine</a></li><li><a href="global.html#addItem">addItem</a></li><li><a href="global.html#addUserInfo">addUserInfo</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#balanceSlice">balanceSlice</a></li><li><a href="global.html#createUserData">createUserData</a></li><li><a href="global.html#dateSlice">dateSlice</a></li><li><a href="global.html#defaultValue">defaultValue</a></li><li><a href="global.html#doCreateUserWithEmailAndPassword">doCreateUserWithEmailAndPassword</a></li><li><a href="global.html#doSignInWithEmailAndPassword">doSignInWithEmailAndPassword</a></li><li><a href="global.html#doSignOut">doSignOut</a></li><li><a href="global.html#fetchTable">fetchTable</a></li><li><a href="global.html#fetchTables">fetchTables</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#getUserId">getUserId</a></li><li><a href="global.html#getUserInfo">getUserInfo</a></li><li><a href="global.html#getWeekNumber">getWeekNumber</a></li><li><a href="global.html#isValidInput">isValidInput</a></li><li><a href="global.html#isValidItemInput">isValidItemInput</a></li><li><a href="global.html#itemSlice">itemSlice</a></li><li><a href="global.html#monthDefaultValue">monthDefaultValue</a></li><li><a href="global.html#queryClient">queryClient</a></li><li><a href="global.html#removeItem">removeItem</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#statisticsSlice">statisticsSlice</a></li><li><a href="global.html#storage">storage</a></li><li><a href="global.html#store">store</a></li><li><a href="global.html#uiSlice">uiSlice</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useLoadUserPhoto">useLoadUserPhoto</a></li><li><a href="global.html#userSlice">userSlice</a></li><li><a href="global.html#weekDefaultValue">weekDefaultValue</a></li><li><a href="global.html#yearDefaultValue">yearDefaultValue</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Feb 05 2025 15:03:28 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

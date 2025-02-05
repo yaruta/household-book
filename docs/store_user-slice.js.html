@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: store/user-slice.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: store/user-slice.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { createSlice } from "@reduxjs/toolkit";
+
+/**
+ * Default initial state for the user slice, retrieving values from locaStorage if available.
+ */
+const defaultValue = {
+  userId: localStorage.getItem("userId") ?? null, // Stores the user's ID
+  userImage: localStorage.getItem("userPhoto") ?? null, // Stores the user's profile image URL
+  isImageAvailable: localStorage.getItem("userPhoto") ? true : false, // Checks if a user image is available
+  isUpdated: false, // Tracks if the user profile has been updated
+  userName: { firstName: "Unknown", lastName: "" }, // Stores the user's first and last name
+};
+
+/**
+ * Redux slice for managing user-related state.
+ */
+const userSlice = createSlice({
+  name: "user",
+  initialState: defaultValue,
+  reducers: {
+    /**
+     * Sets the user ID and saves it to localStorage.
+     * @param {Object} state - The current state.
+     * @param {Object} action - The action containing the new user ID.
+     */
+    setUserId(state, action) {
+      state.userId = action.payload;
+      localStorage.setItem("userId", state.userId);
+    },
+    /**
+     * Removes the user ID from the state and localStorage.
+     * @param {Object} state - The current state.
+     */
+    removeUserId(state) {
+      state.userId = null;
+      localStorage.removeItem("userId");
+    },
+    /**
+     * Sets the user image and saves it to localStorage.
+     * @param {Object} state - The current state.
+     * @param {Object} action - The action containing the new user image URL.
+     */
+    setUserImage(state, action) {
+      state.userImage = action.payload;
+      localStorage.setItem("userPhoto", state.userImage);
+    },
+    /**
+     * Removes the user image from the state and localStorage.
+     * @param {Object} state - The current state.
+     */
+    removeUserImage(state) {
+      state.userImage = null;
+      localStorage.removeItem("userPhoto");
+    },
+    /**
+     * Sets the image availability status to true.
+     * @param {Object} state - The current state.
+     */
+    setIsImageAvailable(state) {
+      state.isImageAvailable = true;
+    },
+    /**
+     * Sets the image availability status to false.
+     * @param {Object} state - The current state.
+     */
+    removeIsImageAvailable(state) {
+      state.isImageAvailable = false;
+    },
+    /**
+     * Marks the user profile as updated.
+     * @param {Object} state - The current state.
+     */
+    setIsUpdated(state) {
+      state.isUpdated = true;
+    },
+    /**
+     * Marks the user profile as not updated.
+     * @param {Object} state - The current state.
+     */
+    removeIsUpdated(state) {
+      state.isUpdated = false;
+    },
+    /**
+     * Sets the user's first and last name.
+     * @param {Object} state - The current state.
+     * @param {Object} action - The action containing the first and last name.
+     */
+    setUserName(state, action) {
+      state.userName.firstName = action.payload.firstName;
+      state.userName.lastName = action.payload.lastName;
+    },
+  },
+});
+
+export const userActions = userSlice.actions;
+
+export default userSlice.reducer;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AvatarIcon">AvatarIcon</a></li><li><a href="global.html#BalanceItem">BalanceItem</a></li><li><a href="global.html#Button">Button</a></li><li><a href="global.html#ColorThemeItem">ColorThemeItem</a></li><li><a href="global.html#DashboardIcon">DashboardIcon</a></li><li><a href="global.html#EditIcon">EditIcon</a></li><li><a href="global.html#FormLine">FormLine</a></li><li><a href="global.html#HomeIcon">HomeIcon</a></li><li><a href="global.html#LinearGradient">LinearGradient</a></li><li><a href="global.html#Logo">Logo</a></li><li><a href="global.html#PhotoIcon">PhotoIcon</a></li><li><a href="global.html#RemoveIcon">RemoveIcon</a></li><li><a href="global.html#Section">Section</a></li><li><a href="global.html#TablesIcon">TablesIcon</a></li><li><a href="global.html#UserFormLine">UserFormLine</a></li><li><a href="global.html#addItem">addItem</a></li><li><a href="global.html#addUserInfo">addUserInfo</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#balanceSlice">balanceSlice</a></li><li><a href="global.html#createUserData">createUserData</a></li><li><a href="global.html#dateSlice">dateSlice</a></li><li><a href="global.html#defaultValue">defaultValue</a></li><li><a href="global.html#doCreateUserWithEmailAndPassword">doCreateUserWithEmailAndPassword</a></li><li><a href="global.html#doSignInWithEmailAndPassword">doSignInWithEmailAndPassword</a></li><li><a href="global.html#doSignOut">doSignOut</a></li><li><a href="global.html#fetchTable">fetchTable</a></li><li><a href="global.html#fetchTables">fetchTables</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#getUserId">getUserId</a></li><li><a href="global.html#getUserInfo">getUserInfo</a></li><li><a href="global.html#getWeekNumber">getWeekNumber</a></li><li><a href="global.html#isValidInput">isValidInput</a></li><li><a href="global.html#isValidItemInput">isValidItemInput</a></li><li><a href="global.html#itemSlice">itemSlice</a></li><li><a href="global.html#monthDefaultValue">monthDefaultValue</a></li><li><a href="global.html#queryClient">queryClient</a></li><li><a href="global.html#removeItem">removeItem</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#statisticsSlice">statisticsSlice</a></li><li><a href="global.html#storage">storage</a></li><li><a href="global.html#store">store</a></li><li><a href="global.html#uiSlice">uiSlice</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useLoadUserPhoto">useLoadUserPhoto</a></li><li><a href="global.html#userSlice">userSlice</a></li><li><a href="global.html#weekDefaultValue">weekDefaultValue</a></li><li><a href="global.html#yearDefaultValue">yearDefaultValue</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Feb 05 2025 15:03:28 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

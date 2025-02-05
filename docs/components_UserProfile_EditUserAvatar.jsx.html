@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/UserProfile/EditUserAvatar.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/UserProfile/EditUserAvatar.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * EditUserAvatar component.
+ * This component allows users to upload, update, or delete their profile photo.
+ * It interacts with Firebase Storage for file management and updates the Redux store accordingly.
+ * @returns {JSX.Element} The user avatar editing component.
+ */
+
+import { deleteObject, uploadBytes } from "firebase/storage";
+import { storage } from "../../firebase/firebase";
+import { ref } from "firebase/storage";
+
+import { useDispatch, useSelector } from "react-redux";
+import { uiActions } from "../../store/ui-slice";
+import { useState } from "react";
+import { userActions } from "../../store/user-slice";
+
+import PhotoIcon from "../Icons/PhotoIcon";
+
+function EditUserAvatar() {
+  const dispatch = useDispatch();
+  const [imageFileUpload, setImageFileUpload] = useState(null);
+  const userId = useSelector((state) => state.user.userId);
+
+  /**
+   * Handles file selection when the user picks an image.
+   * @param {Event} event - The file input change event.
+   */
+  const handleImagePick = (event) => {
+    setImageFileUpload(event.target.files[0]);
+  };
+
+  /**
+   * Uploads the selected image to Firebase Storage and updates the Redux store.
+   * @param {Event} event - The form submission event.
+   */
+  const handleAddPhoto = async (event) => {
+    event.preventDefault();
+
+    if (imageFileUpload === null) {
+      return;
+    }
+
+    const imageRef = ref(storage, `images/${userId}/profileImage`);
+    dispatch(uiActions.setImageIsLoading());
+
+    uploadBytes(imageRef, imageFileUpload).then(() => {
+      setImageFileUpload(null);
+      dispatch(userActions.setIsImageAvailable());
+      dispatch(uiActions.setImageIsNotLoading());
+      dispatch(userActions.setIsUpdated());
+    }).catch((error) => {
+      window.alert(
+        "An error occured by editing the user photo. Please try again later."
+      );
+    });;
+  };
+
+  /**
+   * Deletes the user's profile image from Firebase Storage and updates the Redux store.
+   */
+  const handleDeletePhoto = async () => {
+    const imageRef = ref(storage, `images/${userId}/profileImage`);
+
+    deleteObject(imageRef)
+      .then(() => {
+        dispatch(userActions.removeUserImage());
+        dispatch(userActions.removeIsImageAvailable());
+      })
+      .catch((error) => {
+        window.alert(
+          "An error occured by deleting the user photo. Please try again later."
+        );
+      });
+  };
+
+  return (
+    &lt;div className="flex justify-start gap-8 mt-16 max-lg:flex-col">
+      &lt;div className="w-1/3 max-lg:w-full max-lg:flex max-lg:justify-between max-lg:items-center">
+        &lt;h2 className="uppercase text-xl font-bold">Your photo&lt;/h2>
+        &lt;p className="text-gray-500 max-md:hidden">Update your photo&lt;/p>
+      &lt;/div>
+      &lt;form
+        id="user-info"
+        onSubmit={handleAddPhoto}
+        className="flex items-start justify-between w-2/3 max-lg:w-full"
+      >
+        &lt;div>
+          &lt;label htmlFor="userImageFile">
+            &lt;div className="bg-gradient-to-br from-purple-500 to-pink-500 text-elements-color-main w-12 h-12 rounded-full flex justify-center items-center">
+              &lt;PhotoIcon />
+            &lt;/div>
+          &lt;/label>
+          {imageFileUpload &amp;&amp; (
+            &lt;p className="text-gray-500 text-xs pt-2 text-center">
+              {imageFileUpload.name}
+            &lt;/p>
+          )}
+          &lt;input
+            type="file"
+            id="userImageFile"
+            onChange={handleImagePick}
+            className="hidden"
+          />
+        &lt;/div>
+        &lt;div className="flex gap-4">
+          &lt;button
+            type="button"
+            className="text-gray-500 hover:text-cyan-500"
+            onClick={handleDeletePhoto}
+          >
+            Delete
+          &lt;/button>
+          &lt;button
+            type="submit"
+            className="text-elements-color-main hover:text-purple-500"
+          >
+            Update
+          &lt;/button>
+        &lt;/div>
+      &lt;/form>
+    &lt;/div>
+  );
+}
+
+export default EditUserAvatar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AvatarIcon">AvatarIcon</a></li><li><a href="global.html#BalanceItem">BalanceItem</a></li><li><a href="global.html#Button">Button</a></li><li><a href="global.html#ColorThemeItem">ColorThemeItem</a></li><li><a href="global.html#DashboardIcon">DashboardIcon</a></li><li><a href="global.html#EditIcon">EditIcon</a></li><li><a href="global.html#FormLine">FormLine</a></li><li><a href="global.html#HomeIcon">HomeIcon</a></li><li><a href="global.html#LinearGradient">LinearGradient</a></li><li><a href="global.html#Logo">Logo</a></li><li><a href="global.html#PhotoIcon">PhotoIcon</a></li><li><a href="global.html#RemoveIcon">RemoveIcon</a></li><li><a href="global.html#Section">Section</a></li><li><a href="global.html#TablesIcon">TablesIcon</a></li><li><a href="global.html#UserFormLine">UserFormLine</a></li><li><a href="global.html#addItem">addItem</a></li><li><a href="global.html#addUserInfo">addUserInfo</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#balanceSlice">balanceSlice</a></li><li><a href="global.html#createUserData">createUserData</a></li><li><a href="global.html#dateSlice">dateSlice</a></li><li><a href="global.html#defaultValue">defaultValue</a></li><li><a href="global.html#doCreateUserWithEmailAndPassword">doCreateUserWithEmailAndPassword</a></li><li><a href="global.html#doSignInWithEmailAndPassword">doSignInWithEmailAndPassword</a></li><li><a href="global.html#doSignOut">doSignOut</a></li><li><a href="global.html#fetchTable">fetchTable</a></li><li><a href="global.html#fetchTables">fetchTables</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#getUserId">getUserId</a></li><li><a href="global.html#getUserInfo">getUserInfo</a></li><li><a href="global.html#getWeekNumber">getWeekNumber</a></li><li><a href="global.html#isValidInput">isValidInput</a></li><li><a href="global.html#isValidItemInput">isValidItemInput</a></li><li><a href="global.html#itemSlice">itemSlice</a></li><li><a href="global.html#monthDefaultValue">monthDefaultValue</a></li><li><a href="global.html#queryClient">queryClient</a></li><li><a href="global.html#removeItem">removeItem</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#statisticsSlice">statisticsSlice</a></li><li><a href="global.html#storage">storage</a></li><li><a href="global.html#store">store</a></li><li><a href="global.html#uiSlice">uiSlice</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useLoadUserPhoto">useLoadUserPhoto</a></li><li><a href="global.html#userSlice">userSlice</a></li><li><a href="global.html#weekDefaultValue">weekDefaultValue</a></li><li><a href="global.html#yearDefaultValue">yearDefaultValue</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Feb 05 2025 15:03:28 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/Authentication/AuthForm.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/Authentication/AuthForm.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * AuthForm component.
+ * This component handles user authentication (login and sign-up) using Firebase.
+ * It validates user input, manages authentication state, and dispatches user data to the Redux store.
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isLogin - Determines whether the form is for login or sign-up.
+ * @returns {JSX.Element} The authentication form component.
+*/
+
+import {
+  doCreateUserWithEmailAndPassword,
+  doSignInWithEmailAndPassword,
+} from "../../firebase/auth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { isValidInput } from "../../util/validating";
+import { createUserData, getUserId } from "../../util/http";
+import { useMutation } from "@tanstack/react-query";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../store/user-slice";
+import Button from "../UI/Button";
+import FormInput from "./FormInput";
+
+function AuthForm({ isLogin }) {
+  //States to control the process of authentication with firebase functions
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
+
+  //States for form values and validation errors
+  const [formValues, setFormValues] = useState({
+    email: "",
+    password: "",
+  });
+  const [isError, setIsError] = useState({
+    email: false,
+    password: false,
+  });
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // Mutation hook for creating user data in Firebase after successful registration
+  const { mutate, isError: isMutationError } = useMutation({
+    mutationFn: createUserData,
+  });
+
+  /**
+   * Handles input changes, validates the input, and updates the state.
+   * @param {Object} event - The event object.
+   */
+  function handleChange(event) {
+    const value = event.target.value;
+    const name = event.target.name;
+
+    setFormValues((prevState) => {
+      return { ...prevState, [name]: value };
+    });
+
+    const isValid = isValidInput(value, name);
+    setErrorMessage(false);
+
+    if (!isValid) {
+      setIsError((prevState) => {
+        return { ...prevState, [name]: true };
+      });
+    } else {
+      setIsError((prevState) => {
+        return { ...prevState, [name]: false };
+      });
+    }
+  }
+
+  /**
+   * Handles form submission for login or sign-up.
+   * @param {Object} event - The event object.
+   */
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!isSubmitting) {
+      setIsSubmitting(true);
+
+      try {
+        if (isLogin) {
+          // Login existing user
+          await doSignInWithEmailAndPassword(
+            formValues.email,
+            formValues.password
+          );
+          const id = await getUserId({ email: formValues.email });
+          dispatch(userActions.setUserId(id));
+        }
+        else if (!isLogin) {
+          // Register new user
+          await doCreateUserWithEmailAndPassword(
+            formValues.email,
+            formValues.password
+          );
+          // Create user id
+          const id = Math.floor(Math.random() * 1000000);
+          mutate({ email: formValues.email, id: id });
+          dispatch(userActions.setUserId(id));
+        }
+
+        setIsSubmitting(false);
+        navigate("/");
+      } catch (err) {
+        // Handle authentication errors
+        if (err.code === "auth/invalid-credential") {
+          setErrorMessage(
+            "The E-Mail and password for the login do not match."
+          );
+        } else if (err.code === "auth/missing-email") {
+          setErrorMessage(
+            "This E-Mail is not registered. If you are a new user please sign up."
+          );
+        } else {
+          setErrorMessage(err.code);
+        }
+
+        setIsSubmitting(false);
+        return;
+      }
+    }
+  }
+
+  return (
+    &lt;>
+      {errorMessage &amp;&amp; &lt;p className="text-red-500 mb-8">{errorMessage}&lt;/p>}
+      {isMutationError &amp;&amp; (
+        &lt;p>Didn't manage to create user. Please try again later.&lt;/p>
+      )}
+      &lt;form id="auth-form" className="w-full">
+        &lt;div className="flex justify-between items-start gap-8 mb-8 w-full max-lg:flex-col">
+          &lt;FormInput
+            label="Email"
+            type="email"
+            id="emailLogin"
+            name="email"
+            onChange={handleChange}
+            errorMessage="Please enter a valid email."
+            isError={isError.email}
+            required
+          />
+          &lt;FormInput
+            label="Password"
+            type="password"
+            id="password"
+            name="password"
+            onChange={handleChange}
+            errorMessage="The password must be at least 8 characters long and contain one number and one special character."
+            isError={isError.password}
+            required
+          />
+        &lt;/div>
+        &lt;div className="flex justify-end">
+          &lt;Button onClick={handleSubmit} form="auth-form">
+            {isLogin ? "Login" : "Sign up"}
+          &lt;/Button>
+        &lt;/div>
+      &lt;/form>
+    &lt;/>
+  );
+}
+
+export default AuthForm;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#AuthContext">AuthContext</a></li><li><a href="global.html#AvatarIcon">AvatarIcon</a></li><li><a href="global.html#BalanceItem">BalanceItem</a></li><li><a href="global.html#Button">Button</a></li><li><a href="global.html#ColorThemeItem">ColorThemeItem</a></li><li><a href="global.html#DashboardIcon">DashboardIcon</a></li><li><a href="global.html#EditIcon">EditIcon</a></li><li><a href="global.html#FormLine">FormLine</a></li><li><a href="global.html#HomeIcon">HomeIcon</a></li><li><a href="global.html#LinearGradient">LinearGradient</a></li><li><a href="global.html#Logo">Logo</a></li><li><a href="global.html#PhotoIcon">PhotoIcon</a></li><li><a href="global.html#RemoveIcon">RemoveIcon</a></li><li><a href="global.html#Section">Section</a></li><li><a href="global.html#TablesIcon">TablesIcon</a></li><li><a href="global.html#UserFormLine">UserFormLine</a></li><li><a href="global.html#addItem">addItem</a></li><li><a href="global.html#addUserInfo">addUserInfo</a></li><li><a href="global.html#app">app</a></li><li><a href="global.html#auth">auth</a></li><li><a href="global.html#balanceSlice">balanceSlice</a></li><li><a href="global.html#createUserData">createUserData</a></li><li><a href="global.html#dateSlice">dateSlice</a></li><li><a href="global.html#defaultValue">defaultValue</a></li><li><a href="global.html#doCreateUserWithEmailAndPassword">doCreateUserWithEmailAndPassword</a></li><li><a href="global.html#doSignInWithEmailAndPassword">doSignInWithEmailAndPassword</a></li><li><a href="global.html#doSignOut">doSignOut</a></li><li><a href="global.html#fetchTable">fetchTable</a></li><li><a href="global.html#fetchTables">fetchTables</a></li><li><a href="global.html#firebaseConfig">firebaseConfig</a></li><li><a href="global.html#getUserId">getUserId</a></li><li><a href="global.html#getUserInfo">getUserInfo</a></li><li><a href="global.html#getWeekNumber">getWeekNumber</a></li><li><a href="global.html#isValidInput">isValidInput</a></li><li><a href="global.html#isValidItemInput">isValidItemInput</a></li><li><a href="global.html#itemSlice">itemSlice</a></li><li><a href="global.html#monthDefaultValue">monthDefaultValue</a></li><li><a href="global.html#queryClient">queryClient</a></li><li><a href="global.html#removeItem">removeItem</a></li><li><a href="global.html#router">router</a></li><li><a href="global.html#statisticsSlice">statisticsSlice</a></li><li><a href="global.html#storage">storage</a></li><li><a href="global.html#store">store</a></li><li><a href="global.html#uiSlice">uiSlice</a></li><li><a href="global.html#useAuth">useAuth</a></li><li><a href="global.html#useLoadUserPhoto">useLoadUserPhoto</a></li><li><a href="global.html#userSlice">userSlice</a></li><li><a href="global.html#weekDefaultValue">weekDefaultValue</a></li><li><a href="global.html#yearDefaultValue">yearDefaultValue</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Wed Feb 05 2025 15:03:28 GMT+0100 (Mitteleuropäische Normalzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
