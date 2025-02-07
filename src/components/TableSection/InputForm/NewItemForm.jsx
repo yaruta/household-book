@@ -2,6 +2,7 @@
  * NewItemForm component.
  * This component renders a form for adding or editing an item. It includes validation,
  * state management, and handles form submission using React Query for asynchronous requests.
+ * @module NewItemForm
  * @returns {JSX.Element} The new item form component.
 */
 import { useState } from "react";

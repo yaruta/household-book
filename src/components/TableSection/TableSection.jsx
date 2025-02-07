@@ -3,6 +3,7 @@
  * This component renders the table section, including balance display,
  * a button to add new items, and a monthly table of financial entries.
  * It manages UI state for showing or hiding the new item form.
+ * @module TableSection
  * @returns {JSX.Element} The table section component.
  */
 

@@ -3,6 +3,7 @@
  * This component fetches financial data and calculates statistics based on the selected
  * time period (year, month, or week). It renders both an area chart and a bar chart
  * to visualize the financial data.
+ * @module StatisticsSection
  * @returns {JSX.Element} The statistics section component.
  */
 

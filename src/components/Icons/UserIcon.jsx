@@ -1,6 +1,7 @@
 /**
  * UserIcon component.
  * This component renders a user icon as an SVG.
+ * @module UserIcon
  * @returns {JSX.Element} The user icon component.
  */
 export default function UserIcon() {

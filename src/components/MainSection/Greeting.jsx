@@ -2,6 +2,7 @@
  * Greeting component.
  * This component displays a welcome message with the user's name and avatar.
  * It dynamically renders either the user's uploaded avatar or a default one.
+ * @module Greeting
  * @returns {JSX.Element} The greeting component.
  */
 

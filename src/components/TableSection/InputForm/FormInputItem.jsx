@@ -2,6 +2,7 @@
  * FormInputItem component.
  * This component renders a form input field with different styles depending on the input type.
  * It includes error handling, dynamic label styling, and supports radio buttons and text inputs.
+ * @module FormInputItem
  * @param {Object} props - The component props.
  * @param {string} props.label - The label text for the input field.
  * @param {string} props.id - The unique identifier for the input.

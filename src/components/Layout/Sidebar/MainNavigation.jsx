@@ -2,6 +2,7 @@
  * MainNavigation component.
  * This component renders the main navigation menu, displaying links to various sections
  * of the application when the user is logged in. It also includes a logout button.
+ * @module MainNavigation
  * @returns {JSX.Element} The main navigation component.
  */
 

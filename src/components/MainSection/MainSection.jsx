@@ -3,6 +3,7 @@
  * This component serves as the main content section of the homepage.
  * It displays a greeting, balance overview, and an illustration.
  * It also fetches and updates financial data when available.
+ * @module MainSection
  * @returns {JSX.Element} The main section component.
  */
 

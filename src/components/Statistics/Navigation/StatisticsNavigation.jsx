@@ -2,6 +2,7 @@
  * StatisticsNavigation component.
  * This component provides navigation for different statistical views (week, month, year).
  * It initializes the statistics type to "year" and updates the URL accordingly.
+ * @module StatisticsNavigation
  * @returns {JSX.Element} The statistics navigation component.
  */
 

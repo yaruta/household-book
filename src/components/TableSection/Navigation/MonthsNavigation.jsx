@@ -2,6 +2,7 @@
  * MonthsNavigation component.
  * This component renders a navigation menu for selecting a month.
  * It uses the MonthItem component to generate links for each month.
+ * @module MonthsNavigation
  * @returns {JSX.Element} The months navigation component.
  */
 

@@ -2,6 +2,7 @@
  * EditUserAvatar component.
  * This component allows users to upload, update, or delete their profile photo.
  * It interacts with Firebase Storage for file management and updates the Redux store accordingly.
+ * @module EditUserAvatar
  * @returns {JSX.Element} The user avatar editing component.
  */
 

@@ -2,6 +2,7 @@
  * NavItem component.
  * This component renders a navigation link item using React Router's NavLink.
  * It highlights the active link and allows nested elements (icons and text).
+ * @module NavItem
  * @param {Object} props - The component props.
  * @param {string} props.path - The navigation path.
  * @param {React.ReactNode} props.children - The content inside the navigation item.

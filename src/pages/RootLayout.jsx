@@ -2,6 +2,7 @@
  * RootLayout component.
  * This component serves as the main layout for the application, including
  * the header, sidebar, theme management, and authentication redirection.
+ * @module RootLayout
  * @returns {JSX.Element} The root layout component.
 */
 

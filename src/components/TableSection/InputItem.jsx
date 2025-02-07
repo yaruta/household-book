@@ -2,6 +2,7 @@
  * InputItem component.
  * This component renders an individual financial entry (income or expense) with options to edit or remove it.
  * It uses React Query for asynchronous deletion and updates the Redux store when an item is edited.
+ * @module InputItem
  * @param {Object} props - The component props.
  * @param {string} props.id - The unique identifier of the item.
  * @param {string} props.date - The date associated with the item.

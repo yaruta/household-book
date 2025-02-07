@@ -1,6 +1,7 @@
 /**
  * DashboardIcon component.
  * This component renders a dashboard icon as an SVG.
+ * @module DashboardIcon
  * @returns {JSX.Element} The dashboard icon component.
  */
 function DashboardIcon() {

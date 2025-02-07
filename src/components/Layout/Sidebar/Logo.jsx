@@ -1,6 +1,7 @@
 /**
  * Logo component.
  * This component renders the application logo with a stylized text design.
+ * @module Logo
  * @returns {JSX.Element} The logo component.
 */
 function Logo() {

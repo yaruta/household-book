@@ -4,6 +4,7 @@
  * it is shown inside a styled container. Otherwise, a placeholder with a gradient
  * background is displayed. The component also listens to loading states and applies
  * a loading animation when necessary.
+ * @module UserAvatar
  * @param {Object} props - The component props.
  * @param {string} [props.size="big"] - The size of the avatar (small, middle, or big).
  * @returns {JSX.Element} The user avatar component.

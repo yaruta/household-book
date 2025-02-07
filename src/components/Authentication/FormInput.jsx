@@ -2,6 +2,7 @@
  * FormInput component.
  * This component renders an input field with a label and an optional error message.
  * It tracks whether the input has been blurred to determine when to display validation errors.
+ * @module FormInput
  * @param {Object} props - The component props.
  * @param {string} props.label - The label text for the input field.
  * @param {string} props.id - The unique identifier for the input field.

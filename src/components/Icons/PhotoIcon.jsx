@@ -1,6 +1,7 @@
 /**
  * PhotoIcon component.
  * This component renders a camera icon as an SVG.
+ * @module PhotoIcon
  * @returns {JSX.Element} The camera icon component.
  */
 function PhotoIcon() {

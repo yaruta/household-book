@@ -2,6 +2,7 @@
  * DefaultAvatar component.
  * This component renders a default user avatar with different size options.
  * It applies a gradient background and includes an AvatarIcon.
+ * @module DefaultAvatar
  * @param {Object} props - The component props.
  * @param {string} [props.size="big"] - The size of the avatar (small, middle, or big).
  * @returns {JSX.Element} The default avatar component.

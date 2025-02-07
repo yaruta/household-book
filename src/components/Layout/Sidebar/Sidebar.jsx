@@ -2,6 +2,7 @@
  * Sidebar component.
  * This component renders the sidebar, which includes the application logo
  * and the main navigation menu. The width adapts based on screen size.
+ * @module Sidebar
  * @returns {JSX.Element} The sidebar component.
  */
 

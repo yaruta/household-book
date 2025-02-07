@@ -2,6 +2,7 @@
  * Balance component.
  * This component displays the balance, income, and expenses.
  * It adapts its styling based on the current route.
+ * @module Balance
  * @returns {JSX.Element} The balance component.
  */
 

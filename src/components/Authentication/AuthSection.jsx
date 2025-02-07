@@ -3,6 +3,7 @@
  * This section handles user authentication by displaying a login or sign-up form
  * based on the current URL query parameters. It also provides navigation links
  * between login and sign-up modes.
+ * @module AuthSection
  * @returns {JSX.Element} The authentication section component.
 */
 

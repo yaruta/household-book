@@ -2,6 +2,7 @@
  * ColorThemeItem component.
  * This component renders a selectable color theme option.
  * It highlights the active theme and triggers a callback when clicked.
+ * @module ColorThemeIcon
  * @param {Object} props - The component props.
  * @param {string} props.title - The title of the color theme.
  * @param {boolean} props.isActive - Indicates whether the theme is currently active.

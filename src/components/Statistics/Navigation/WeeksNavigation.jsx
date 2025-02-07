@@ -2,6 +2,7 @@
  * WeeksNavigation component.
  * This component allows users to navigate between weeks. It initializes the current
  * week number and updates the Redux store when the user selects a different week.
+ * @module WeeksNavigation
  * @returns {JSX.Element} The weeks navigation component.
  */
 import { useDispatch, useSelector } from "react-redux";

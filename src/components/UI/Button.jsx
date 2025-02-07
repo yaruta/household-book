@@ -2,6 +2,7 @@
  * Button component.
  * This component renders a customizable button with different styles.
  * It supports a main style and a secondary style by default.
+ * @module Button
  * @param {Object} props - The component props.
  * @param {React.ReactNode} props.children - The content inside the button.
  * @param {string} [props.styleType="main"] - The button style type (main or secondary).

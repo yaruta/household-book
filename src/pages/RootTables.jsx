@@ -2,6 +2,7 @@
  * RootTables component.
  * This component serves as the root layout for the tables section,
  * including the tables navigation and rendering nested routes via Outlet.
+ * @module RootTables
  * @returns {JSX.Element} The root tables layout component.
 */
 

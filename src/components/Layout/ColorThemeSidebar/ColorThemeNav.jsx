@@ -2,6 +2,7 @@
  * ColorThemeNav component.
  * This component provides a navigation menu for selecting the application's color theme.
  * It displays theme options and updates the selected theme in the Redux store when clicked.
+ * @module ColorThemeNav
  * @returns {JSX.Element} The color theme navigation component.
 */
 

@@ -2,6 +2,7 @@
  * MonthsNavigation component.
  * This component renders a dropdown for selecting a month.
  * It initializes the selected month and year based on the current date and updates the Redux store.
+ * @module MonthsNavigation
  * @returns {JSX.Element} The months navigation component.
  */
 

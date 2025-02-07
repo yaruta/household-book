@@ -2,6 +2,7 @@
  * MonthItem component.
  * This component renders a navigation link for selecting a month.
  * It updates the Redux store when a month is selected and highlights the active selection.
+ * @module MonthItem
  * @param {Object} props - The component props.
  * @param {string} props.title - The name of the month.
  * @param {string} props.path - The navigation path for the selected month.

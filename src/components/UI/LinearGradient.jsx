@@ -3,6 +3,7 @@
  * This component defines reusable SVG linear gradient definitions for charts.
  * It includes gradients for balance, revenue, and expenses with different colors and opacities.
  * These gradients can be used in Recharts components to enhance data visualization.
+ * @module LinearGradient
  * @returns {JSX.Element} SVG linear gradient definitions.
  */
 

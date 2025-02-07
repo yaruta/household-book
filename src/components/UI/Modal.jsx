@@ -2,6 +2,7 @@
  * Modal component.
  * This component renders a modal dialog using the HTML <dialog> element.
  * It utilizes React Portals to render outside the main component tree.
+ * @module Modal
  * @param {Object} props - The component props.
  * @param {React.ReactNode} props.children - The content inside the modal.
  * @param {boolean} props.open - Determines whether the modal should be displayed.

@@ -2,6 +2,7 @@
  * YearsNavigation component.
  * This component renders a dropdown for selecting a year. It initializes the selected
  * year in the Redux store upon mounting and updates the state when a new year is selected.
+ * @module YearsNavigation
  * @returns {JSX.Element} The years navigation component.
  */
 

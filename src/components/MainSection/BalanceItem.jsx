@@ -2,6 +2,7 @@
  * BalanceItem component.
  * This component displays a financial value (balance, income, or expenses)
  * with a color-coded gradient based on the type.
+ * @module BalanceItem
  * @param {Object} props - The component props.
  * @param {number} props.amount - The financial amount to display.
  * @param {string} props.type - The type of balance item ("Balance", "Income", or "Expenses").

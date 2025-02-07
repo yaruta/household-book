@@ -2,6 +2,7 @@
  * Section component.
  * This component renders a styled <section> element with a gradient background.
  * It allows custom classes to be added via the className prop.
+ * @module Section
  * @param {Object} props - The component props.
  * @param {React.ReactNode} props.children - The content inside the section.
  * @param {string} [props.className] - Additional CSS classes for styling.

@@ -1,6 +1,7 @@
 /**
  * TableIcon component.
  * This component renders a table icon as an SVG.
+ * @module TablesIcon
  * @returns {JSX.Element} The table icon component.
  */
 function TablesIcon() {

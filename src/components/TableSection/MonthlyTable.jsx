@@ -2,6 +2,7 @@
  * MonthlyTable component.
  * This component fetches and displays a monthly financial table for the selected user.
  * It uses React Query to retrieve data asynchronously and updates the balance state.
+ * @module MonthlyTable
  * @returns {JSX.Element} The monthly table component.
  */
 

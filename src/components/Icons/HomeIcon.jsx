@@ -1,6 +1,7 @@
 /**
  * HomeIcon component.
  * This component renders a home icon as an SVG.
+ * @module HomeIcon
  * @returns {JSX.Element} The home icon component.
  */
 function HomeIcon() {

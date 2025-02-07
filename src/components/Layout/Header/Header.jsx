@@ -2,6 +2,7 @@
  * Header component.
  * This component renders the application's header, displaying the user's name, email,
  * and avatar if logged in. It also includes a button to toggle the sidebar.
+ * @module Header
  * @returns {JSX.Element} The header component.
  */
 

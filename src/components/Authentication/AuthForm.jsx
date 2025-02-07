@@ -2,6 +2,8 @@
  * AuthForm component.
  * This component handles user authentication (login and sign-up) using Firebase.
  * It validates user input, manages authentication state, and dispatches user data to the Redux store.
+ * 
+ * @module AuthForm
  * @param {Object} props - The component props.
  * @param {boolean} props.isLogin - Determines whether the form is for login or sign-up.
  * @returns {JSX.Element} The authentication form component.

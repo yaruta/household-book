@@ -3,6 +3,7 @@
  * This component renders the navigation for the tables section, allowing users to
  * select a specific month and year. It automatically navigates to the current month
  * upon mounting.
+ * @module TablesNavigation
  * @returns {JSX.Element} The tables navigation component.
  */
 

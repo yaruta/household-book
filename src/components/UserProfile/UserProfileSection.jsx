@@ -2,6 +2,7 @@
  * UserProfileSection component.
  * This component displays and allows the user to edit their profile information,
  * including first name, last name, and profile picture.
+ * @module UserProfileSection
  * @returns {JSX.Element} The user profile section component.
  */
 
